@@ -1,0 +1,38 @@
+.signupContanier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+.Sinput {
+    width: 435px;
+    height: 30px;
+    margin: 10px;
+}
+
+#suh1 {
+    margin-top: 30px;
+}
+
+.horizontal-line {
+    width: 85%;
+    height: 1px; 
+    background-color: #ccc; 
+    margin-bottom: 20px;
+}
+
+.Signup {
+    width: 440px;
+    height: 40px;
+    color: white;
+    background-color: #003580;
+    margin-bottom: 10%;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.Signup:hover {
+    background-color: #001F4D;
+}

@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import morgan from "morgan";
+import multer from "multer";
+import fs from 'fs';
 
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
@@ -11,6 +16,12 @@ import reviewsRoute from "./routes/reviews.js";
 
 const app = express();
 dotenv.config();
+
+// 현재 모듈의 URL을 파일 경로로 변환
+const __filename = fileURLToPath(import.meta.url);
+
+// 파일 경로에서 디렉토리 이름 추출
+const __dirname = path.dirname(__filename);
 
 // DB 연결
 const connect = async () => {
@@ -27,12 +38,18 @@ mongoose.connection.on("disconnected", () => {
     console.log("mongoDB disconnected!");
 });
 
+// 특정 도메인만 연결
+const corsOptions = {
+    origin : "http://localhost:3000",
+    credentials: true,
+};
+
 // 미들웨어 설정
-app.use(express.json());
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
+app.use(morgan('combined'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // API 엔드포인트 설정
 app.use("/api/auth", authRoute); 
@@ -45,12 +62,6 @@ app.listen(process.env.PORT, () => {
     connect();
     console.log("Connected to backend.");
 });
-
-// 특정 도메인만 연결
-// const corsOptions = {
-//     origin : "http://localhost:3000",
-//     credentials: true,
-// };
 
 // 전역 오류 처리를 위한 코드
 app.use((err, req, res, next) => {

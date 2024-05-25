@@ -1,31 +1,24 @@
-.navbar{
+.lnavbar {
     height: 50px;
     background-color: #003580;
     display: flex;
     justify-content: center;
-  }
-  
-  .navContainer{
+    text-align: center;
+}
+
+.lnavContainer {
     width: 100%;
     max-width: 1024px;
     color: white;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  
-  .logo{
+    justify-content: center;
+}
+
+.llogo {
     font-weight: 500;
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
-  }
-  
-  .navButton{
-    margin-left: 20px;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: #003580;
-  }
+}
