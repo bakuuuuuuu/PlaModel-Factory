@@ -135,3 +135,7 @@ a {
     border: 1px solid #ccc;
     margin-right: 5px;
 }
+
+#auto-login-text {
+    margin-right: 110px;
+}
