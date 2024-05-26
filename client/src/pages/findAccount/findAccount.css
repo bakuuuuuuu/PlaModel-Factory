@@ -1,17 +1,16 @@
 /* 영역 */
-#applelogo {
-    width: 45px;
-    height: 45px;
-    border-radius: 100%;
-}
 
-.loginContainer {
+.findAccountContainer {
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     height: 100vh;
+}
+
+.findAccount-content {
+    margin-top: 147px;
 }
 
 .util-top {
@@ -22,31 +21,9 @@
     margin-bottom: 40px;
 }
 
-.login-form {
+.findAccount-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.options {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: small;
-}
-
-.social-login {
-    text-align: center;
-    margin-top: 45px;
-    margin-bottom: 50px;
-}
-
-.social-buttons {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -55,19 +32,16 @@
     text-align: center;
 }
 
-.snsbtn {
-    margin-right: 10px;
-}
-
 /*요소*/
-.login-input {
+.findAccount-input {
     width: 360px;
     height: 48px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
 }
 
-#login-btn {
+#findAccount-btn {
+    margin-left: 18px;
     width: 370px;
     height: 56px;
     background-color: cornflowerblue;
@@ -79,12 +53,14 @@
     transition: background-color 0.3s, border 0.3s;
 }
 
-#login-btn:hover {
+#findAccount-btn:hover {
     background-color: #003580;
     border: 2px solid #003580;
 }
 
-#login-signupbtn {
+#findAccount-signupbtn {
+    margin-top: 30px;
+    margin-left: 18px;
     width: 360px;
     height: 48px;
     border: 1px solid #ccc;
@@ -94,11 +70,11 @@
     transition: background-color 0.3s;
 }
 
-#login-signupbtn:hover {
+#findAccount-signupbtn:hover {
     background-color: whitesmoke;
 }
 
-#login-logo {
+#findAccount-logo {
     border: 4px solid cornflowerblue;
     border-radius: 5px;
     padding: 5px;
@@ -110,27 +86,7 @@ a {
     text-decoration: none;
 }
 
-#login-desc {
+#findAccount-desc {
     font-size: small;
     font-weight: 500;
-}
-
-#login-sns-desc {
-    font-size: small;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.login-find {
-    color: black;
-}
-
-#auto-login {
-    transform: scale(1.5);
-    border: 1px solid #ccc;
-    margin-right: 5px;
-}
-
-#auto-login-text {
-    margin-right: 142px;
 }

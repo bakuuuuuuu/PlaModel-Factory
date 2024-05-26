@@ -1,13 +1,15 @@
+import bcrypt from "bcryptjs";
 import path from 'path';
 import fs from 'fs';
 import User from "../models/User.js";
 import { fileURLToPath } from 'url';
+import jwt from 'jsonwebtoken';
 
 // ES 모듈에서 __filename과 __dirname을 사용하는 방법
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 사용자 정보를 업데이트하는 함수
+// 사용자 정보를 업데이트하는 미들웨어
 export const updateUser = async (req, res, next) => {
     try {
 
@@ -25,7 +27,7 @@ export const updateUser = async (req, res, next) => {
     }
 };
 
-// 사용자를 삭제하는 함수
+// 사용자를 삭제하는 미들웨어
 export const deleteUser = async (req, res, next) => {
     try {
 
@@ -39,7 +41,7 @@ export const deleteUser = async (req, res, next) => {
     }
 };
 
-// 특정 사용자의 정보를 가져오는 함수
+// 특정 사용자의 정보를 가져오는 미들웨어
 export const getUser = async (req, res, next) => {
     try {
 
@@ -53,7 +55,58 @@ export const getUser = async (req, res, next) => {
     }
 };
 
-// 모든 사용자의 정보를 가져오는 함수
+// 계정 찾기 미들웨어
+export const getUserByDetails = async (req, res, next) => {
+    try {
+        const { username, phone, gender } = req.body;
+
+        // 사용자 이름, 전화번호, 성별이 일치하는 사용자를 찾음
+        const user = await User.findOne({ username, phone, gender });
+
+        if (!user) {
+            return res.status(404).json({ message: "일치하는 사용자가 없습니다." });
+        }
+
+        // 일치하는 사용자의 이메일과 비밀번호를 반환
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+        res.status(200).json({ email: user.email, token });
+    } catch (err) {
+        next(err); // 오류 발생 시 다음 미들웨어에 오류 전달
+    }
+};
+
+// 비밀번호 재설정 미들웨어
+export const changePassword = async (req, res, next) => {
+    try {
+        const { email, password, token } = req.body;
+
+        // 토큰 검증 및 사용자 ID 추출
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded.id;
+
+        // 이메일과 ID가 일치하는 사용자를 찾음
+        const user = await User.findOne({ _id: userId, email });
+
+        if (!user) {
+            return res.status(404).json({ message: "일치하는 사용자가 없습니다." });
+        }
+
+        // 비밀번호 해싱을 위한 salt 생성
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        // 사용자 정보 업데이트
+        user.password = hashedPassword;
+        await user.save();
+
+        // 응답 : 비밀번호가 성공적으로 변경되었음을 알리는 메시지
+        res.status(200).send("비밀번호가 성공적으로 변경되었습니다.");
+    } catch (err) {
+        next(err); // 오류 발생 시 다음 미들웨어에 오류 전달
+    }
+};
+
+// 모든 사용자의 정보를 가져오는 미들웨어
 export const getUsers = async (req, res, next) => {
     try {
 

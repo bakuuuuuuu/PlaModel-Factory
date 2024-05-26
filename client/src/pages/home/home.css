@@ -1,0 +1,50 @@
+.homeContainer {
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 100%;
+}
+
+.home-mainimg {
+    width: 100%;
+    height: 800px;
+    background-image: url('https://cdn.bnkrmall.co.kr/live/data/base/banner/c433df08b64a40e58a15fd36c6b6ea24.jpg?resize=2880&quality=70');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hashtag {
+    margin-right: 70px;
+}
+
+.home-Recommendation {
+    width: 100%;
+    height: 400px;
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+}
+
+#Recommendation1, #Recommendation2, #Recommendation3, #Recommendation4 {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 20%;
+    height: 80%;
+}
+
+#Recommendation1 {
+    background-image: url('https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240328/396fe3c8e8584a60a59142cc0b180cfe.jpg?resize=550&quality=70');
+}
+
+#Recommendation2 {
+    background-image: url('https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240408/df837dea22e74cc9a76327bc251db3fb.jpg?resize=550&quality=70');
+}
+
+#Recommendation3 {
+    background-image: url('https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240510/68e4144e08f94b4582aecc6a141a60ec.jpg?resize=550&quality=70');
+}
+
+#Recommendation4 {
+    background-image: url('https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240512/e93477da95554708a4e280c0f0dd8afe.jpg?resize=550&quality=70');
+}

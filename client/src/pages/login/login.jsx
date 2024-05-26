@@ -7,7 +7,7 @@ import "../login/login.css";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
-        username: undefined,
+        email: undefined,
         password: undefined
     });
 
@@ -21,6 +21,10 @@ const Login = () => {
 
     const handleLoginSignupClick = () => {
         navigate("/signup");
+    }
+
+    const handleFindAccountClick = () => {
+        navigate("/findAccount");
     }
 
     const handleClick = async (e) => {
@@ -55,21 +59,21 @@ const Login = () => {
                     </div>
                     <div className="login-form">
                         <div>
-                            <input type="text" placeholder="아이디를 입력해주세요" className="login-input" id="username" onChange={handleChange}/><br></br>
-                            <input type="password" placeholder="비밀번호를 입력해주세요" className="login-input" id="password" onChange={handleChange}/>
+                            <input type="email" placeholder="이메일 입력" className="login-input" id="email" onChange={handleChange}/><br></br>
+                            <input type="password" placeholder="비밀번호 입력" className="login-input" id="password" onChange={handleChange}/>
                         </div>
                         <div className="options">
                             <div>
                                 <input type="checkbox" id="auto-login"/> <span id="auto-login-text">자동 로그인</span>
                             </div>
                             <div>
-                                <a href="#" className="login-find">아이디 찾기</a> | <a href="#" className="login-find">비밀번호 찾기</a>
+                                <a href="#" className="login-find" onClick={handleFindAccountClick}>아이디 | 비밀번호 찾기</a>
                             </div>
                         </div>
                         <button type="submit" id="login-btn" onClick={handleClick}>로그인</button>
                     </div>
                     <div className="social-login">
-                        <p id="login-sns-desc">SNS계정으로 로그인하기</p>
+                        <p id="login-sns-desc">SNS 계정으로 로그인하기</p>
                         <div className="social-buttons">
                             <div className="snsbtn">
                                 <a href="#">
