@@ -60,7 +60,7 @@ const Login = () => {
                         </div>
                         <div className="options">
                             <div>
-                                <input type="checkbox" id="auto-login"/> <span id="auto-login-text">자동 로그인</span>{/*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/}
+                                <input type="checkbox" id="auto-login"/> <span id="auto-login-text">자동 로그인</span>
                             </div>
                             <div>
                                 <a href="#" className="login-find">아이디 찾기</a> | <a href="#" className="login-find">비밀번호 찾기</a>
