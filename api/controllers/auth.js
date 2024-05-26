@@ -25,7 +25,7 @@ export const register = async (req, res, next) => {
         await newUser.save();
 
         // 응답 : 사용자가 생성되었음을 알리는 메시지
-        res.status(200).send("User has been created.");
+        res.status(200).send("회원가입이 완료되었습니다.");
     } catch (err) {
         next(err);
     }
@@ -38,7 +38,7 @@ export const login = async (req, res, next) => {
         const user = await User.findOne({ username: req.body.username });
 
         // 사용자가 없으면 오류 처리
-        if (!user) return next(createError(404, "User not found!"));
+        if (!user) return next(createError(404, "아이디를 확인해 주세요."));
 
         // 비밀번호 일치 여부 확인
         const isPasswordCorrect = await bcrypt.compare(
@@ -48,7 +48,7 @@ export const login = async (req, res, next) => {
 
         // 비밀번호가 일치하지 않으면 오류 처리
         if (!isPasswordCorrect)
-            return next(createError(400, "Wrong password or username!"));
+            return next(createError(400, "비밀번호가 일치하지 않습니다."));
 
         // JWT 토큰 생성
         const token = jwt.sign(
@@ -81,5 +81,5 @@ export const logout = (req, res) => {
             sameSite: "strict",
         })
         .status(200)
-        .json({ message: "Logged out succcessFully" });
+        .json({ message: "로그아웃이 완료되었습니다!" });
 }

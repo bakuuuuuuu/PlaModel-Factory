@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <div className="lnavbar">
             <div className="lnavContainer">
-                <span className="llogo" onClick={handleHomeClick}>Moble</span>
+                <span className="llogo" onClick={handleHomeClick}>PLAMODEL FACTORY</span>
             </div>
         </div>
 
