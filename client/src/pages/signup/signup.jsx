@@ -67,12 +67,12 @@ const Signup = () => {
                                 <input type="password" placeholder="비밀번호 입력" className="signup-input" id="password" onChange={handleChange} />
                             </div>
                             <div>
-                                <FontAwesomeIcon icon={faVenusMars} fixedWidth className="signup-icon" />
+                            <FontAwesomeIcon icon={faVenusMars} fixedWidth className="signup-icon" />
                                 <button className="signup-gender" style={{ backgroundColor: selectedGender === '남자' ? '#ccc' : '' }} onClick={() => handleGenderClick('남자')}>남자</button>
                                 <button className="signup-gender" style={{ backgroundColor: selectedGender === '여자' ? '#ccc' : '' }} onClick={() => handleGenderClick('여자')}>여자</button>
                             </div>
                             <div>
-                                <FontAwesomeIcon icon={faEnvelope} fixedWidth className="signup-icon" />
+                               <FontAwesomeIcon icon={faEnvelope} fixedWidth className="signup-icon" />
                                 <input type="email" placeholder="이메일 입력" className="signup-input" id="email" onChange={handleChange} />
                             </div>
                             <div>

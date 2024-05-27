@@ -1,0 +1,66 @@
+/* 영역 */
+.mypageContainer {
+    display: flex;
+}
+
+.mypage-sidemenu {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.sidemenu-top {
+    text-align: center;
+}
+
+.mypage-content {
+    flex: 3;
+}
+
+.horizontalLineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 요소 */
+.mypage-menu {
+    margin-bottom: 5px;
+    list-style: none;
+    font-weight: lighter;
+    font-size: smaller;
+    cursor: pointer;
+    transition: font-weight 0.3s, font-size 0.3s;
+}
+
+.mypage-menu:hover {
+    font-weight: 500;
+    font-size: medium;
+}
+
+.horizontal-line {
+    width: 80%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+.mypage-desc {
+    font-size: 40px;
+}
+
+.sidemenu-desc {
+    font-weight: bolder;
+}
+
+.mypage-profile-image {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #ccc;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}

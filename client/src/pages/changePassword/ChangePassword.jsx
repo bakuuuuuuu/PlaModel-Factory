@@ -36,8 +36,11 @@ const ChangePassword = () => {
                 const token = localStorage.getItem('resetToken');
                 const res = await axios.put(`${apiUrl}/users/changePassword`, {
                     email: changePassword.email,
-                    password: changePassword.password,
-                    token
+                    password: changePassword.password
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
                 alert("비밀번호가 성공적으로 변경되었습니다.");
                 navigate("/login");

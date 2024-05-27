@@ -12,6 +12,7 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import FindAccount from "./pages/findAccount/FindAccount";
 import ChangePassword from "./pages/changePassword/ChangePassword";
+import Mypage from "./pages/mypage/Mypage";
 
 function App() {
   const [canAccessChangePassword, setCanAccessChangePassword] = useState(false);
@@ -34,6 +35,7 @@ function App() {
             canAccessChangePassword ? <ChangePassword /> : <Navigate to="/findAccount" />
           }
         />
+        <Route path = "/mypage" element = {<Mypage/>}/>
       </Routes>
     </BrowserRouter>
   );

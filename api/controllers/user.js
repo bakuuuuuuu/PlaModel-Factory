@@ -78,7 +78,8 @@ export const getUserByDetails = async (req, res, next) => {
 // 비밀번호 재설정 미들웨어
 export const changePassword = async (req, res, next) => {
     try {
-        const { email, password, token } = req.body;
+        const { email, password } = req.body;
+        const token = req.headers.authorization.split(' ')[1];
 
         // 토큰 검증 및 사용자 ID 추출
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -121,35 +122,35 @@ export const getUsers = async (req, res, next) => {
 };
 
 
-// export const updateProfileImage = async (req, res, next) => {
-//     try {
-//         const userId = req.params.id;
-//         const imgPath = req.file.path.replace(/\\/g, "/");
+export const updateProfileImage = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const imgPath = req.file.path.replace(/\\/g, "/");
 
-//         if (!userId) {
-//             return next(createError(400, "User ID is required"));
-//         }
+        if (!userId) {
+            return next(createError(400, "User ID is required"));
+        }
 
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return next(createError(404, "User not found"));
-//         }
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, "User not found"));
+        }
 
-//         if (user.img) {
-//             const oldImage = path.join(__dirname, '../', user.img);
-//             if (fs.existsSync(oldImage)) {
-//                 try {
-//                     fs.unlinkSync(oldImage);
-//                 } catch {
-//                     return next(createError(500, "이미지 삭제 오류"));
-//                 }
-//             }
-//         }
+        if (user.img) {
+            const oldImage = path.join(__dirname, '../', user.img);
+            if (fs.existsSync(oldImage)) {
+                try {
+                    fs.unlinkSync(oldImage);
+                } catch {
+                    return next(createError(500, "이미지 삭제 오류"));
+                }
+            }
+        }
 
-//         user.img = `/uploads/${req.file.filename}`;
-//         await user.save();
-//         res.status(200).json({ message: "Profile image updated", user: { img: `uploads/${req.file.filename}` } });
-//     } catch (e) {
-//         next(e);
-//     }
-// };
+        user.img = `/uploads/${req.file.filename}`;
+        await user.save();
+        res.status(200).json({ message: "Profile image updated", user: { img: `uploads/${req.file.filename}` } });
+    } catch (e) {
+        next(e);
+    }
+};
