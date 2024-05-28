@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import Home from "./pages/home/Home";
-import Product from "./pages/product/Product";
+import ProductDetail from "./pages/product/ProductDetail";
 import List from "./pages/list/List";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<List />} />
-        <Route path="/products/:id" element={<Product />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route

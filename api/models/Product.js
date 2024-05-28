@@ -25,7 +25,7 @@ const ProductSchema = new mongoose.Schema({
     },
     rating: { // 상품 평점
         type: Number,
-        default : 5,
+        default: 5,
         min: 0,
         max: 5,
     },
@@ -40,6 +40,14 @@ const ProductSchema = new mongoose.Schema({
     discountedPrice: { // 할인 가격
         type: Number,
         default: 0,
+    },
+    isNew: { //신상품 유무
+        type: Boolean,
+        default: false
+    },
+    createdAt : { // 등록날짜
+        type : Date,
+        default : Date.now,
     }
 });
 export default mongoose.model("Product", ProductSchema);

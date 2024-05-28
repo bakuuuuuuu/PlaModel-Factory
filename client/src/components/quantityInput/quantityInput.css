@@ -1,0 +1,31 @@
+.quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    overflow: hidden; /* 모서리가 둥근 상태로 자르기 위해 필요 */
+    width: 120px;
+    height: 40px; /* 전체 높이를 설정 */
+}
+
+.quantity-input button {
+    width: 40px; /* 버튼 너비 설정 */
+    height: 60px; /* 버튼 높이를 부모 요소에 맞추기 */
+    border: none;
+    background-color: white; /* 버튼 배경색 */
+    color: black;
+    cursor: pointer;
+}
+
+.quantity-input button:hover {
+    background-color: #e0e0e0; /* 호버 시 배경색 */
+}
+
+.quantity-input input {
+    width: 40px; /* 입력 필드 너비 */
+    height: 60px; /* 입력 필드 높이를 부모 요소에 맞추기 */
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background-color: white;
+}

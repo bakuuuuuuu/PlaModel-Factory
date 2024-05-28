@@ -1,0 +1,77 @@
+.Review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 755px;
+}
+
+.reviewP {
+    margin: 10px;
+}
+
+a {
+    color: black;
+}
+
+.Wreivew {
+    width: 750px;
+}
+
+#WRtitle {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+#WRcontent {
+    height: 100px;
+}
+
+#WRbtn {
+    width: 100px;
+    height: 30px;
+    color: white;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#WRbtn:hover {
+    background-color: rgb(80, 80, 200);
+}
+
+.star-rating {
+    margin-bottom: 10px;
+}
+
+.reviewIcon {
+    margin-right: 10px;
+}
+
+.pagebtn {
+    width: 70px;
+    height: 30px;
+    color: white;
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    border: none;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagebtn:hover {
+    background-color: rgb(80, 80, 200);
+}
+
+.rating-select {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+#Rvtitle, #Rvcontent {
+    font-weight: bold;
+    font-size:medium;
+}
