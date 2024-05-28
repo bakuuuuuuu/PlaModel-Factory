@@ -36,6 +36,7 @@ function App() {
           }
         />
         <Route path = "/mypage" element = {<Mypage/>}/>
+        <Route path = "/list" element = {<List/>}/>
       </Routes>
     </BrowserRouter>
   );
