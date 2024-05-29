@@ -43,6 +43,10 @@ const Header = () => {
     navigate("/mypage");
   };
 
+  const handleCartClick = () => {
+    navigate("/cart");
+  }
+
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -61,7 +65,7 @@ const Header = () => {
             <span className="homebtn" id="header-right1">
               <FontAwesomeIcon icon={faCartArrowDown} />
               <span className="cartBadge">0</span>
-              &nbsp;장바구니
+              &nbsp;<span onClick={handleCartClick}>장바구니</span>
             </span>
           </div>
         ) : (

@@ -1,0 +1,24 @@
+.cartContainer {
+    display: flex;
+}
+
+.orderCart-content-form{
+    border: 1px solid black;
+}
+
+.Cart-oderbtn{
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.Cart-oderbtn:hover {
+    background-color: #003580;
+}

@@ -32,7 +32,10 @@ const Signup = () => {
     const handleClick = async () => {
         try {
             const apiUrl = process.env.REACT_APP_API_URL;
+
+            // 회원가입 요청
             const res = await axios.post(`${apiUrl}/auth/register`, formData);
+
             alert("회원가입이 완료되었습니다.")
             navigate("/login")
         }

@@ -7,32 +7,46 @@ import Rating from '../../components/rating/Rating';
 import { useNavigate } from 'react-router-dom';
 import "../list/list.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox, faTag, faCube, faWonSign, faWarehouse, faWrench } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faTag, faCube, faWonSign, faWarehouse, faWrench, faPercentage } from '@fortawesome/free-solid-svg-icons';
 
 const List = () => {
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortCriteria, setSortCriteria] = useState(null);
     const itemsPerPage = 8;
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProductsAndReviews = async () => {
             try {
                 const apiUrl = process.env.REACT_APP_API_URL;
                 const [productResponse, reviewResponse] = await Promise.all([
                     axios.get(`${apiUrl}/products`),
                     axios.get(`${apiUrl}/reviews`)
                 ]);
-                setProducts(productResponse.data);
+
+                const productsWithReviewCount = productResponse.data.map(product => {
+                    const productReviews = reviewResponse.data.filter(review => review.productid === product._id);
+                    return { ...product, reviewCount: productReviews.length };
+                });
+
+                setProducts(productsWithReviewCount);
                 setReviews(reviewResponse.data);
             } catch (error) {
                 console.error("There was an error fetching the data!", error);
             }
         };
 
-        fetchProducts();
+        fetchProductsAndReviews();
     }, []);
+
+    // 정렬
+    useEffect(() => {
+        if (sortCriteria) {
+            setProducts(prevProducts => [...prevProducts].sort(sortCriteria));
+        }
+    }, [sortCriteria]);
 
     const calculateAverageRating = (productId) => {
         const productReviews = reviews.filter(review => review.productid === productId);
@@ -57,6 +71,19 @@ const List = () => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
+    // 정렬 함수들 정의
+    const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
+    const sortByLowestPrice = (a, b) => a.price - b.price;
+    const sortByHighestPrice = (a, b) => b.price - a.price;
+    const sortByDiscountRate = (a, b) => b.discountedPrice - a.discountedPrice;
+    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; // 수정된 부분
+    const sortByHighestRating = (a, b) => calculateAverageRating(b._id) - calculateAverageRating(a._id);
+
+    // 공통 정렬 핸들러
+    const handleSort = (sortFunction) => {
+        setSortCriteria(() => sortFunction);
+    };
+
     return (
         <div>
             <Header />
@@ -73,25 +100,25 @@ const List = () => {
                         </div>
                         <div className="productList-content-middle-bottom">
                             <div>
-                                <button className="productList-filterbtn">인기도순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByMostReviews)}>인기도순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">최신등록순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByNewest)}>최신등록순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">낮은가격순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByLowestPrice)}>낮은가격순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">높은가격순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByHighestPrice)}>높은가격순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">할인율순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByDiscountRate)}>할인율순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">리뷰많은순</button> <span className="filter-text">|&nbsp;</span>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByMostReviews)}>리뷰많은순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn">평점높은순</button>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByHighestRating)}>평점높은순</button>
                             </div>
                         </div>
                     </div>
@@ -101,13 +128,27 @@ const List = () => {
                         {selectedProducts.map((product) => (
                             <div key={product._id} className="productList-content-bottom-product" onClick={() => handleProductClick(product._id)}>
                                 <img src={product.photos[0]} alt={product.productName} id='product-img' />
-                                <h4><FontAwesomeIcon icon={faBox} /> {product.productName}</h4>
-                                <Rating rating={calculateAverageRating(product._id)} />
-                                <p><FontAwesomeIcon icon={faTag} /> {product.category}</p>
-                                <p><FontAwesomeIcon icon={faCube} /> {product.type}</p>
-                                <p><FontAwesomeIcon icon={faWonSign} /> {formatPrice(product.price)}원</p>
-                                <p><FontAwesomeIcon icon={faWarehouse} /> {product.inventory}개</p>
-                                <p><FontAwesomeIcon icon={faWrench} /> {product.manufacturer}</p>
+                                <div>
+                                    <h4><FontAwesomeIcon icon={faBox} /> {product.productName}</h4>
+                                </div>
+                                <div id='productList-ratingContainer'>
+                                    <Rating rating={calculateAverageRating(product._id)} /> <span>({product.reviewCount})</span>
+                                </div>
+                                <div>
+                                    <p><FontAwesomeIcon icon={faTag} /> {product.category}</p>
+                                </div>
+                                <div>
+                                    <p><FontAwesomeIcon icon={faCube} /> {product.type}</p>
+                                </div>
+                                <div>
+                                    <p><FontAwesomeIcon icon={faWonSign} /> {formatPrice(product.price)}원 <span id='List-discount'>{product.discountedPrice}%</span></p>
+                                </div>
+                                <div>
+                                    <p><FontAwesomeIcon icon={faWarehouse} /> {product.inventory}개</p>
+                                </div>
+                                <div>
+                                    <p><FontAwesomeIcon icon={faWrench} /> {product.manufacturer}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

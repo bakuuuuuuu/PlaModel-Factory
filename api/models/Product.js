@@ -41,7 +41,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    isNew: { //신상품 유무
+    isNewProduct: { //신상품 유무
         type: Boolean,
         default: false
     },

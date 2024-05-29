@@ -34,10 +34,23 @@ const Login = () => {
         try {
             const apiUrl = process.env.REACT_APP_API_URL;
             const res = await axios.post(`${apiUrl}/auth/login`, credentials, { withCredentials: true });
+            const userId = res.data.details._id;
+
+            // 로그인 성공 후 장바구니 확인 및 생성
+            try {
+                await axios.get(`${apiUrl}/carts/${userId}`, { withCredentials: true });
+            } catch (cartErr) {
+                if (cartErr.response && cartErr.response.status === 404) {
+                    // 장바구니가 없는 경우 생성
+                    await axios.post(`${apiUrl}/carts/create`, { userId }, { withCredentials: true });
+                } else {
+                    throw cartErr; // 다른 오류는 다시 throw
+                }
+            }
+
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-            navigate("/")
-        }
-        catch (err) {
+            navigate("/");
+        } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
             alert(err.response.data.message);
         }
@@ -59,12 +72,12 @@ const Login = () => {
                     </div>
                     <div className="login-form">
                         <div>
-                            <input type="email" placeholder="이메일 입력" className="login-input" id="email" onChange={handleChange}/><br></br>
-                            <input type="password" placeholder="비밀번호 입력" className="login-input" id="password" onChange={handleChange}/>
+                            <input type="email" placeholder="이메일 입력" className="login-input" id="email" onChange={handleChange} /><br></br>
+                            <input type="password" placeholder="비밀번호 입력" className="login-input" id="password" onChange={handleChange} />
                         </div>
                         <div className="options">
                             <div>
-                                <input type="checkbox" id="auto-login"/> <span id="auto-login-text">자동 로그인</span>
+                                <input type="checkbox" id="auto-login" /> <span id="auto-login-text">자동 로그인</span>
                             </div>
                             <div>
                                 <a href="#" className="login-find" onClick={handleFindAccountClick}>아이디 | 비밀번호 찾기</a>

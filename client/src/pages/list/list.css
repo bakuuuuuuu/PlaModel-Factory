@@ -108,3 +108,18 @@
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
+
+#List-discount {
+    margin-left: 3px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-size: small;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#productList-ratingContainer{
+    display: flex;
+    flex-direction: row;
+}
