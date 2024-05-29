@@ -1,32 +1,34 @@
-import express from "express";
+import express from 'express';
 import {
-    createCart,
-    updateCart,
-    removeProductFromCart,
-    deleteCart,
-    getCart,
-    getCarts
+    createCartIfNotExists ,
+    deleteCartById,
+    getCarts,
+    addToCart,
+    getCartByUserId,
+    removeFromCart 
 } from "../controllers/cart.js";
 import { verifyAdmin, verifyToken, verifyUser, verifyTokenForCart, verifyUserForCart } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 // 장바구니 생성
-router.post("/create", createCart);
-
-// 장바구니 업데이트 (사용자가 새로운 상품을 더 담거나, 이미 장바구니에 담긴 상품을 추가로 담을 경우)
-router.put("/:id", verifyUser, updateCart);
-
-// 장바구니에서 특정 상품 삭제
-router.delete("/product/:productId", verifyUserForCart, removeProductFromCart);
+router.post('/createCart', verifyTokenForCart, createCartIfNotExists, (req, res) => {
+    res.status(200).json("Cart created successfully if not exists");
+});
 
 // 장바구니 삭제 (사용자가 회원 탈퇴를 할 때 장바구니도 같이 삭제)
-router.delete("/:id", verifyUserForCart, deleteCart);
+router.delete("/:id", deleteCartById);
 
-// 장바구니 조회(사용자가 자신의 장바구니를 확인할 때) 
-router.get("/:id", verifyTokenForCart, getCart);
-
-// 전체 장바구니 조회(관리자용)
+// 전체 조회
 router.get("/", verifyAdmin, getCarts);
+
+// 장바구니에 상품 추가 라우트
+router.post('/add', verifyTokenForCart, addToCart);
+
+// 로그인한 사용자의 장바구니 가져오기 라우트
+router.get('/:userId', verifyTokenForCart, getCartByUserId);
+
+// 장바구니에서 특정 상품 삭제 라우트
+router.post('/remove', verifyTokenForCart, removeFromCart);
 
 export default router;

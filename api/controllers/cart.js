@@ -1,91 +1,123 @@
 import Cart from "../models/Cart.js";
+import { createError } from "../utils/error.js";
 
-// 장바구니 생성 (사용자가 회원가입할 때 생성/ 만약 회원가입한 사용자가 장바구니가 없으면 로그인할 때 생성)
-export const createCart = async (req, res, next) => {
-    const newCart = new Cart(req.body);
+// 생성
+export const createCartIfNotExists = async (req, res, next) => {
     try {
-        const savedCart = await newCart.save();
-        res.status(200).json(savedCart);
+        // 사용자의 _id를 가져옴
+        const userId = req.user.id;
+
+        // 해당 사용자의 장바구니가 존재하는지 확인
+        const existingCart = await Cart.findOne({ userId });
+
+        // 장바구니가 존재하지 않는 경우 새 장바구니 생성
+        if (!existingCart) {
+            const newCart = new Cart({ userId, products: [] });
+            await newCart.save();
+        }
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+};
+
+// 삭제
+export const deleteCartById  = async (req, res, next) => {
+    try {
+        const cartId = req.params.id;
+
+        // 장바구니 존재 확인
+        const cart = await Cart.findById(cartId);
+
+        if (!cart) {
+            return next(createError(404, "장바구니를 찾을 수 없습니다."));
+        }
+
+        await Cart.findByIdAndDelete(cartId);
+
+        res.status(200).json("장바구니가 삭제되었습니다.");
     }
     catch (err) {
         next(err);
     }
 };
 
-// 장바구니 업데이트 (사용자가 새로운 상품을 더 담거나, 이미 장바구니에 담긴 상품을 추가로 담을 경우)
-export const updateCart = async (req, res, next) => {
+// 전체 장바구니 조회
+export const getCarts = async(req, res, next) => {
     try {
-        const cart = await Cart.findOne({ userId: req.user.id });
+        const carts = await Cart.find();
+        res.status(200).json(carts);
+    }
+    catch(err) {
+        next(err);
+    }
+};
+
+// 장바구니에 상품 추가 미들웨어
+export const addToCart = async (req, res, next) => {
+    try {
+        const { productId, quantity, price } = req.body;
+        const userId = req.user.id;
+
+        let cart = await Cart.findOne({ userId });
+
         if (!cart) {
-            return res.status(404).json("Cart not found");
+            // 장바구니가 없으면 새로 생성
+            cart = new Cart({ userId, products: [] });
         }
 
-        const productIndex = cart.products.findIndex(p => p.productId.toString() === req.body.productId);
-        if (productIndex > -1) {
-            // 상품이 이미 장바구니에 있는 경우 수량을 업데이트
-            cart.products[productIndex].quantity = req.body.quantity;
+        // 장바구니에 동일한 상품이 있는지 확인
+        const existingProductIndex = cart.products.findIndex(p => p.productId === productId);
+
+        if (existingProductIndex > -1) {
+            // 동일한 상품이 있으면 수량만 업데이트
+            cart.products[existingProductIndex].quantity += quantity;
         } else {
-            // 새로운 상품을 장바구니에 추가
-            cart.products.push({
-                productId: req.body.productId,
-                quantity: req.body.quantity,
-                price: req.body.price
-            });
+            // 새 상품을 장바구니에 추가
+            cart.products.push({ productId, quantity, price });
         }
 
-        const updatedCart = await cart.save();
-        res.status(200).json(updatedCart);
-    } catch (err) {
-        next(err);
-    }
-};
-
-// 장바구니에서 특정 상품 삭제
-export const removeProductFromCart = async (req, res, next) => {
-    try {
-        const cart = await Cart.findOne({ userId: req.user.id });
-        if (!cart) {
-            return res.status(404).json("Cart not found");
-        }
-
-        cart.products = cart.products.filter(p => p.productId.toString() !== req.params.productId);
-        const updatedCart = await cart.save();
-        res.status(200).json(updatedCart);
-    } catch (err) {
-        next(err);
-    }
-};
-
-// 장바구니 삭제 (사용자가 회원 탈퇴를 할 때 장바구니도 같이 삭제)
-export const deleteCart = async (req, res, next) => {
-    try {
-        await Cart.findOneAndDelete({ userId: req.user.id });
-        res.status(200).json("Cart has been deleted.");
-    }
-    catch (err) {
-        next(err);
-    }
-};
-
-// 장바구니 조회(사용자가 장바구니에 접속하면 해당 사용자의 장바구니를 보여줄 때 사용)
-export const getCart = async (req, res, next) => {
-    try {
-        const cart = await Cart.findOne({ userId: req.user.id }).populate('products.productId');
-        if (!cart) {
-            return res.status(404).json("Cart not found");
-        }
+        await cart.save();
         res.status(200).json(cart);
     } catch (err) {
         next(err);
     }
 };
 
-// 전체 장바구니 조회(관리자용)
-export const getCarts = async (req, res, next) => {
-    const { limit, ...others } = req.query;
+// 로그인한 사용자의 장바구니를 가져오는 미들웨어
+export const getCartByUserId = async (req, res, next) => {
     try {
-        const carts = await Cart.find({ ...others }).limit(parseInt(limit) || 0);
-        res.status(200).json(carts);
+        const userId = req.user.id;
+        const cart = await Cart.findOne({ userId }).populate('products.productId'); // populate 사용
+
+        if (!cart) {
+            return next(createError(404, "Cart not found!"));
+        }
+
+        res.status(200).json(cart);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// 장바구니에서 특정 상품 삭제 미들웨어
+export const removeFromCart = async (req, res, next) => {
+    try {
+        const { productId } = req.body;
+        const userId = req.user.id;
+
+        let cart = await Cart.findOne({ userId });
+
+        if (!cart) {
+            return next(createError(404, "Cart not found!"));
+        }
+
+        // 해당 상품 제거
+        cart.products = cart.products.filter(product => product.productId.toString() !== productId);
+
+        await cart.save();
+        res.status(200).json(cart);
     } catch (err) {
         next(err);
     }

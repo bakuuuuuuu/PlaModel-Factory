@@ -39,13 +39,12 @@
     flex-direction: row;
     width: 100%;
     height: 50px;
-    background-color: #F5F7F8;
     border-top: 3px solid cornflowerblue;
 }
 
 .productList-filterbtn {
     margin: 10px;
-    background-color: #F5F7F8;
+    background-color: white;
     border: none;
     cursor: pointer;
     color: #aaa;

@@ -12,7 +12,6 @@ const Login = () => {
     });
 
     const { loading, error, dispatch } = useContext(AuthContext);
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -36,19 +35,15 @@ const Login = () => {
             const res = await axios.post(`${apiUrl}/auth/login`, credentials, { withCredentials: true });
             const userId = res.data.details._id;
 
-            // 로그인 성공 후 장바구니 확인 및 생성
-            try {
-                await axios.get(`${apiUrl}/carts/${userId}`, { withCredentials: true });
-            } catch (cartErr) {
-                if (cartErr.response && cartErr.response.status === 404) {
-                    // 장바구니가 없는 경우 생성
-                    await axios.post(`${apiUrl}/carts/create`, { userId }, { withCredentials: true });
-                } else {
-                    throw cartErr; // 다른 오류는 다시 throw
-                }
-            }
-
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+
+            // 로그인 성공 시 장바구니 생성 및 카운트 설정
+            await axios.post(`${apiUrl}/carts/createCart`, {}, { withCredentials: true });
+
+            // 장바구니 상품 수 업데이트
+            const cartResponse = await axios.get(`${apiUrl}/carts/${userId}`, { withCredentials: true });
+            dispatch({ type: "SET_CART_ITEM_COUNT", payload: cartResponse.data.products.length });
+
             navigate("/");
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

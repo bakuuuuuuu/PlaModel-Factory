@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Menubar from "../../components/header/Menubar";
 import Rating from '../../components/rating/Rating';
 import Review from '../../components/review/Review';
 import QuantityInput from '../../components/quantityInput/QuantityInput';
+import { AuthContext } from '../../context/AuthContext';
 import "../product/productDetail.css";
 
 const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
+    const [quantity, setQuantity] = useState(1);
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -43,6 +47,29 @@ const ProductDetail = () => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
+    const handleAddToCart = async () => {
+        if (!user) {
+            alert("로그인이 필요합니다.");
+            navigate("/login");
+            return;
+        }
+
+        try {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const cartItem = {
+                productId: product._id,
+                quantity: quantity,
+                price: product.price
+            };
+
+            await axios.post(`${apiUrl}/carts/add`, cartItem, { withCredentials: true });
+            alert("장바구니에 상품이 추가되었습니다.");
+        } catch (error) {
+            console.error("장바구니에 상품을 추가하는 도중 오류가 발생했습니다!", error);
+            alert("장바구니에 상품을 추가하는 도중 오류가 발생했습니다!");
+        }
+    };
+
     return (
         <div>
             <Header />
@@ -69,9 +96,9 @@ const ProductDetail = () => {
                             <p><strong>가격 : </strong> {formatPrice(product.price)}원</p>
                             <p><strong>제조사 : </strong> {product.manufacturer}</p>
                             <p><strong>제품 설명 : </strong> {product.desc}</p>
-                            <QuantityInput />
+                            <QuantityInput value={quantity} onChange={setQuantity} />
                             {product.inventory > 0 ? (
-                                <button className='productDetail-CartInbtn'>장바구니 담기</button>
+                                <button className='productDetail-CartInbtn' onClick={handleAddToCart}>장바구니 담기</button>
                             ) : (
                                 <button className='productDetail-SoldOutbtn' disabled>SOLD OUT</button>
                             )}

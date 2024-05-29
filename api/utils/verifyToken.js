@@ -131,6 +131,3 @@ export const checkReviewOwnership = async (req, res, next) => {
         }
     });
 };
-
-
-// next() 함수는 현재 미드웨어에서 다음에 실행될 미들웨어를 호출하는 데 사용

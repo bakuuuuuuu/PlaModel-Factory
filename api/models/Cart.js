@@ -8,7 +8,8 @@ const CartSchema = new mongoose.Schema({
     products: [
         {
             productId: { // 상품 id
-                type: String,
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product", // 참조하는 모델명
                 required: true,
             },
             quantity: { // 장바구니에 담은 상품 수량

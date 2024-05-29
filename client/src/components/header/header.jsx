@@ -7,9 +7,7 @@ import { faUser, faSignInAlt, faUserPlus, faUserCircle, faCartArrowDown } from '
 import "./header.css"
 
 const Header = () => {
-
-  const { user, dispatch } = useContext(AuthContext);
-
+  const { user, dispatch, cartItemCount } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -21,16 +19,14 @@ const Header = () => {
   };
 
   const handleLogoutClick = async () => {
-
     try {
       const apiUrl = process.env.REACT_APP_API_URL;
       const res = await axios.get(`${apiUrl}/auth/logout`, { withCredentials: true });
       console.log(res.data);
       dispatch({ type: "LOGOUT" });
-      alert("로그아웃이 완료되었습니다.")
+      alert("로그아웃이 완료되었습니다.");
       navigate("/login");
-    }
-    catch (err) {
+    } catch (err) {
       console.error("Logout failed : ", err);
     }
   };
@@ -62,10 +58,10 @@ const Header = () => {
             <span className="homebtn" onClick={handleMypageClick}>
               <FontAwesomeIcon icon={faUser} />&nbsp;마이페이지
             </span>
-            <span className="homebtn" id="header-right1">
+            <span className="homebtn" id="header-right1" onClick={handleCartClick}>
               <FontAwesomeIcon icon={faCartArrowDown} />
-              <span className="cartBadge">0</span>
-              &nbsp;<span onClick={handleCartClick}>장바구니</span>
+              <span className="cartBadge">{cartItemCount}</span>
+              &nbsp;<span>장바구니</span>
             </span>
           </div>
         ) : (
@@ -73,7 +69,7 @@ const Header = () => {
             <span onClick={handleLoginClick} className="homebtn">
               <FontAwesomeIcon icon={faSignInAlt} />&nbsp;로그인
             </span>
-            <span className="homebtn" onClick={handleSignupClick}  id="header-right2">
+            <span className="homebtn" onClick={handleSignupClick} id="header-right2">
               <FontAwesomeIcon icon={faUserPlus} />&nbsp;회원가입
             </span>
           </div>

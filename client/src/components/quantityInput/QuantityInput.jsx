@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import "../quantityInput/quantityInput.css"
 
-const QuantityInput = () => {
-    const [quantity, setQuantity] = useState(1);
-
+const QuantityInput = ({ value, onChange }) => {
     const handleIncrement = () => {
-        setQuantity(quantity + 1);
+        onChange(value + 1);
     };
 
     const handleDecrement = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+        if (value > 1) {
+            onChange(value - 1);
         }
     };
 
     return (
         <div className="quantity-input">
             <button onClick={handleDecrement}>-</button>
-            <input type="text" value={quantity} readOnly />
+            <input type="text" value={value} readOnly />
             <button onClick={handleIncrement}>+</button>
         </div>
     );
