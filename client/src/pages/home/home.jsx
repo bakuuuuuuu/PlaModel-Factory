@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Menubar from "../../components/header/Menubar";
+import { useNavigate } from "react-router-dom";
 import "../home/home.css";
 
 const images = [
@@ -14,6 +16,8 @@ const images = [
 
 const Home = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [recommendations, setRecommendations] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,6 +25,22 @@ const Home = () => {
         }, 5000);
 
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            try {
+                const apiUrl = process.env.REACT_APP_API_URL;
+                const response = await axios.get(`${apiUrl}/products`);
+                const products = response.data;
+                const shuffled = products.sort(() => 0.5 - Math.random());
+                setRecommendations(shuffled.slice(0, 4));
+            } catch (error) {
+                console.error("Failed to fetch products", error);
+            }
+        };
+
+        fetchRecommendations();
     }, []);
 
     const goToPreviousImage = () => {
@@ -33,6 +53,10 @@ const Home = () => {
 
     const goToImage = (index) => {
         setCurrentImageIndex(index);
+    };
+
+    const handleProductClick = (id) => {
+        navigate(`/products/${id}`);
     };
 
     return (
@@ -68,26 +92,13 @@ const Home = () => {
                     <span className="hashtag">#취향저격 프라모델</span>
                 </div>
                 <div className="home-recommendation">
-                    <div className="recommendation-item" id="recommendation1">
-                        <img src="https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240328/396fe3c8e8584a60a59142cc0b180cfe.jpg?resize=550&quality=70" alt="Recommendation 1" />
-                        <p>나루토 질풍전</p>
-                        <p>23,000원</p>
-                    </div>
-                    <div className="recommendation-item" id="recommendation2">
-                        <img src="https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240408/df837dea22e74cc9a76327bc251db3fb.jpg?resize=550&quality=70" alt="Recommendation 2" />
-                        <p>S.H.피규아트 오공 블랙</p>
-                        <p>43,200원</p>
-                    </div>
-                    <div className="recommendation-item" id="recommendation3">
-                        <img src="https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240510/68e4144e08f94b4582aecc6a141a60ec.jpg?resize=550&quality=70" alt="Recommendation 3" />
-                        <p>초합금 루빅스 큐브</p>
-                        <p>128,700원</p>
-                    </div>
-                    <div className="recommendation-item" id="recommendation4">
-                        <img src="https://cdn.bnkrmall.co.kr/live/data/base/goods/middle/20240512/e93477da95554708a4e280c0f0dd8afe.jpg?resize=550&quality=70" alt="Recommendation 4" />
-                        <p>DX초합금혼 메카고질라 1974</p>
-                        <p>514,800원</p>
-                    </div>
+                    {recommendations.map((product, index) => (
+                        <div key={index} className="recommendation-item" onClick={() => handleProductClick(product._id)}>
+                            <img src={product.photos[0]} alt={`Recommendation ${index + 1}`} id="home-recommendation-img"/>
+                            <p>{product.productName}</p>
+                            <p>{new Intl.NumberFormat('ko-KR').format(product.price)}원</p>
+                        </div>
+                    ))}
                 </div>
             </div>
             <Footer />

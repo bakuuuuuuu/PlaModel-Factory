@@ -14,6 +14,7 @@ const List = () => {
     const [reviews, setReviews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortCriteria, setSortCriteria] = useState(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const itemsPerPage = 8;
     const navigate = useNavigate();
 
