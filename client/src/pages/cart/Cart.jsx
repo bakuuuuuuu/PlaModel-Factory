@@ -10,6 +10,7 @@ import "../cart/cart.css";
 const Cart = () => {
     const [cart, setCart] = useState(null);
     const [selectedProducts, setSelectedProducts] = useState([]);
+    const [isAllSelected, setIsAllSelected] = useState(false);
     const { user, dispatch } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -63,9 +64,19 @@ const Cart = () => {
 
             // 선택된 상품 초기화
             setSelectedProducts([]);
+            alert("해당 상품이 삭제되었습니다.")
         } catch (error) {
             console.error("There was an error removing the products from the cart!", error);
         }
+    };
+
+    const handleSelectAllChange = () => {
+        if (isAllSelected) {
+            setSelectedProducts([]);
+        } else {
+            setSelectedProducts(cart.products.map(product => product.productId._id));
+        }
+        setIsAllSelected(!isAllSelected);
     };
 
     const totalProductPrice = calculateTotalProductPrice();
@@ -81,20 +92,38 @@ const Cart = () => {
                 <div className="cartContent">
                     <div className="cartProducts">
                         {cart.products.length === 0 ? (
-                            <p>장바구니에 담긴 상품이 없습니다</p>
-                        ) : (
-                            cart.products.map((product) => (
-                                <div key={product.productId._id} className="cartProduct">
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedProducts.includes(product.productId._id)}
-                                        onChange={() => handleCheckboxChange(product.productId._id)}
-                                    />
-                                    <span>{product.productId.productName}</span>
-                                    <span>{product.quantity}</span>
-                                    <span>{new Intl.NumberFormat('ko-KR').format(product.price)}원</span>
+                            <>
+                                <div className="cartProductHeader">
+                                    <input type="checkbox" checked={isAllSelected} onChange={handleSelectAllChange} />
+                                    <span id='cartProductHeader-productName'>상품명</span>
+                                    <span id='cartProductHeader-count'>수량</span>
+                                    <span id='cartProductHeader-price'>가격</span>
                                 </div>
-                            ))
+                                <div className='cartInNone'>
+                                    <p>장바구니에 담긴 상품이 없습니다.</p>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="cartProductHeader">
+                                    <input type="checkbox" checked={isAllSelected} onChange={handleSelectAllChange} />
+                                    <span id='cartProductHeader-productName'>상품명</span>
+                                    <span id='cartProductHeader-count'>수량</span>
+                                    <span id='cartProductHeader-price'>가격</span>
+                                </div>
+                                {cart.products.map((product) => (
+                                    <div key={product.productId._id} className="cartProduct">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedProducts.includes(product.productId._id)}
+                                            onChange={() => handleCheckboxChange(product.productId._id)}
+                                            id='cartProduct-productCheck' />
+                                        <span>{product.productId.productName}</span>
+                                        <span>{product.quantity}</span>
+                                        <span>{new Intl.NumberFormat('ko-KR').format(product.price)}원</span>
+                                    </div>
+                                ))}
+                            </>
                         )}
                     </div>
                     <div className="cartSummary">

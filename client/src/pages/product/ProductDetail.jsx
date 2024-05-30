@@ -64,7 +64,7 @@ const ProductDetail = () => {
 
             await axios.post(`${apiUrl}/carts/add`, cartItem, { withCredentials: true });
 
-            // 장바구니 상품 수 업데이트
+            // 장바구니 상품 수 업데이트 (추가된 부분)
             const cartResponse = await axios.get(`${apiUrl}/carts/${user._id}`, { withCredentials: true });
             dispatch({ type: "SET_CART_ITEM_COUNT", payload: cartResponse.data.products.length });
 

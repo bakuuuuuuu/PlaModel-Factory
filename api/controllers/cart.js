@@ -1,4 +1,5 @@
 import Cart from "../models/Cart.js";
+import Product from "../models/Product.js";
 import { createError } from "../utils/error.js";
 
 // 생성
@@ -78,6 +79,14 @@ export const addToCart = async (req, res, next) => {
             cart.products.push({ productId, quantity, price });
         }
 
+        // 재고 감소 로직
+        const product = await Product.findById(productId);
+        if (product.inventory < quantity) {
+            return next(createError(400, "재고가 부족합니다."));
+        }
+        product.inventory -= quantity;
+        await product.save();
+
         await cart.save();
         res.status(200).json(cart);
     } catch (err) {
@@ -113,8 +122,20 @@ export const removeFromCart = async (req, res, next) => {
             return next(createError(404, "Cart not found!"));
         }
 
+        // 해당 상품 정보 가져오기
+        const productInCart = cart.products.find(product => product.productId.toString() === productId);
+
+        if (!productInCart) {
+            return next(createError(404, "Product not found in cart!"));
+        }
+
         // 해당 상품 제거
         cart.products = cart.products.filter(product => product.productId.toString() !== productId);
+
+        // 재고 증가 로직
+        const product = await Product.findById(productId);
+        product.inventory += productInCart.quantity;
+        await product.save();
 
         await cart.save();
         res.status(200).json(cart);
