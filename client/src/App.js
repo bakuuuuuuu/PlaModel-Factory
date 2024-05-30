@@ -8,6 +8,12 @@ import { useState } from "react";
 import Home from "./pages/home/Home";
 import ProductDetail from "./pages/product/ProductDetail";
 import List from "./pages/list/List";
+import GundamList from "./pages/list/GundamList";
+import BestProductList from "./pages/list/BestProductList";
+import NewProductList from "./pages/list/NewProductList";
+import DigimonList from "./pages/list/DigimonList";
+import PokemonList from "./pages/list/PokemonList";
+import HexaGearList from "./pages/list/HexaGearList";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import FindAccount from "./pages/findAccount/FindAccount";
@@ -38,6 +44,12 @@ function App() {
         />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/list" element={<List />} />
+        <Route path="/bestProductList" element={<BestProductList/>}/>
+        <Route path="/newProductList" element={<NewProductList/>}/>
+        <Route path="/gundamList" element={<GundamList/>}/>
+        <Route path="/digimonList" element={<DigimonList/>}/>
+        <Route path="/pokemonList" element={<PokemonList/>}/>
+        <Route path="/hexaGearList" element={<HexaGearList/>}/>
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>

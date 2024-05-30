@@ -6,14 +6,16 @@ import Menubar from "../../components/header/Menubar";
 import Rating from '../../components/rating/Rating';
 import { useNavigate } from 'react-router-dom';
 import "../list/list.css";
+import "../list/productCategoryImg.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox, faTag, faCube, faWonSign, faWarehouse, faWrench, faPercentage } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faTag, faCube, faWonSign, faWarehouse, faWrench } from '@fortawesome/free-solid-svg-icons';
 
-const List = () => {
+const HexaGearList = () => {
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortCriteria, setSortCriteria] = useState(null);
+    const [filterType, setFilterType] = useState(null);
     const itemsPerPage = 8;
     const navigate = useNavigate();
 
@@ -26,7 +28,9 @@ const List = () => {
                     axios.get(`${apiUrl}/reviews`)
                 ]);
 
-                const productsWithReviewCount = productResponse.data.map(product => {
+                const filteredProducts = productResponse.data.filter(product => product.category === "헥사기어");
+
+                const productsWithReviewCount = filteredProducts.map(product => {
                     const productReviews = reviewResponse.data.filter(review => review.productid === product._id);
                     return { ...product, reviewCount: productReviews.length };
                 });
@@ -41,23 +45,26 @@ const List = () => {
         fetchProductsAndReviews();
     }, []);
 
-    // 정렬
     useEffect(() => {
         if (sortCriteria) {
             setProducts(prevProducts => [...prevProducts].sort(sortCriteria));
         }
     }, [sortCriteria]);
 
+    const filteredProducts = filterType 
+        ? products.filter(product => product.type === filterType) 
+        : products;
+
     const calculateAverageRating = (productId) => {
         const productReviews = reviews.filter(review => review.productid === productId);
         if (productReviews.length === 0) return 0;
         const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
-        return (totalRating / productReviews.length).toFixed(1); // 소수점 1자리까지 표시
+        return (totalRating / productReviews.length).toFixed(1);
     };
 
-    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const selectedProducts = products.slice(startIndex, startIndex + itemsPerPage);
+    const selectedProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -71,17 +78,20 @@ const List = () => {
         return new Intl.NumberFormat('ko-KR').format(price);
     };
 
-    // 정렬 함수들 정의
     const sortByNewest = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
     const sortByLowestPrice = (a, b) => a.price - b.price;
     const sortByHighestPrice = (a, b) => b.price - a.price;
     const sortByDiscountRate = (a, b) => b.discountedPrice - a.discountedPrice;
-    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; // 수정된 부분
+    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount;
     const sortByHighestRating = (a, b) => calculateAverageRating(b._id) - calculateAverageRating(a._id);
 
-    // 공통 정렬 핸들러
     const handleSort = (sortFunction) => {
         setSortCriteria(() => sortFunction);
+    };
+
+    const handleFilter = (event) => {
+        const selectedType = event.target.value;
+        setFilterType(selectedType === '전체' ? null : selectedType);
     };
 
     return (
@@ -90,15 +100,22 @@ const List = () => {
             <Menubar />
             <div className="productListContainer">
                 <div className="productList-content-top">
-                    <div className="productList-content-img-all">
+                    <div className="productList-content-img-hexagear">
                     </div>
                 </div>
                 <div className="productList-content-middle">
                     <div className="productList-content-middle-position">
                         <div className="productList-content-middle-top">
-                            <h4>전체 상품</h4>
+                            <h4>헥사기어</h4>
                         </div>
                         <div className="productList-content-middle-bottom">
+                            <div>
+                                <select className="productList-filterDropdown" onChange={handleFilter}>
+                                    <option value="전체">전체</option>
+                                    <option value="MACHINE">MACHINE</option>
+                                    <option value="GOVERNOR">GOVERNOR</option>
+                                </select><span className="filter-text">&nbsp;|&nbsp;</span>
+                            </div>
                             <div>
                                 <button className="productList-filterbtn" onClick={() => handleSort(sortByMostReviews)}>인기도순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
@@ -118,7 +135,7 @@ const List = () => {
                                 <button className="productList-filterbtn" onClick={() => handleSort(sortByMostReviews)}>리뷰많은순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                             <div>
-                                <button className="productList-filterbtn" onClick={() => handleSort(sortByHighestRating)}>평점높은순</button>
+                                <button className="productList-filterbtn" onClick={() => handleSort(sortByHighestRating)}>평점높은순</button> <span className="filter-text">|&nbsp;</span>
                             </div>
                         </div>
                     </div>
@@ -170,4 +187,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default HexaGearList;

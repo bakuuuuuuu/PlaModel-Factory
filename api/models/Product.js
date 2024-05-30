@@ -4,11 +4,11 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    category: { // 카테고리 (ex : 건담, 디지몬, 포켓몬)
+    category: { // 카테고리 (ex : 건담, 디지몬, 포켓몬, 헥사기어)
         type: String,
         required: true,
     },
-    type: { // 종류 (ex : HG, MG, PG)
+    type: { // 종류 (ex : HG, MG, PG)(ex : Figure-Rise-Standard, Figure-Rise-Standard-Amplified)
         type: String,
         required: true,
     },

@@ -9,7 +9,7 @@ import "../list/list.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBox, faTag, faCube, faWonSign, faWarehouse, faWrench, faPercentage } from '@fortawesome/free-solid-svg-icons';
 
-const List = () => {
+const BestProductList = () => {
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -96,7 +96,7 @@ const List = () => {
                 <div className="productList-content-middle">
                     <div className="productList-content-middle-position">
                         <div className="productList-content-middle-top">
-                            <h4>전체 상품</h4>
+                            <h4>베스트 상품</h4>
                         </div>
                         <div className="productList-content-middle-bottom">
                             <div>
@@ -170,4 +170,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default BestProductList;

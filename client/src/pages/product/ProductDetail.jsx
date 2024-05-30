@@ -85,7 +85,7 @@ const ProductDetail = () => {
                         <h1>{product.desc}</h1>
                         <div className="productDetail-img">
                             {product.photos.map((photo, index) => (
-                                <img key={index} src={photo} alt={`${product.productName} ${index + 1}`} />
+                                <img key={index} src={photo} alt={`${product.productName} ${index + 1}`} id='pd-img'/>
                             ))}
                         </div>
                         <div className='productDetail-review'>
@@ -101,7 +101,7 @@ const ProductDetail = () => {
                             <p><strong>가격 : </strong> {formatPrice(product.price)}원</p>
                             <p><strong>제조사 : </strong> {product.manufacturer}</p>
                             <p><strong>제품 설명 : </strong> {product.desc}</p>
-                            <QuantityInput value={quantity} onChange={setQuantity} />
+                            <QuantityInput value={quantity} onChange={setQuantity} max={product.inventory} />
                             {product.inventory > 0 ? (
                                 <button className='productDetail-CartInbtn' onClick={handleAddToCart}>장바구니 담기</button>
                             ) : (

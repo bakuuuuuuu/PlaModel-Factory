@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../quantityInput/quantityInput.css"
 
-const QuantityInput = ({ value, onChange }) => {
+const QuantityInput = ({ value, onChange, max }) => {
     const handleIncrement = () => {
-        onChange(value + 1);
+        if (value < max) {
+            onChange(value + 1);
+        }
     };
 
     const handleDecrement = () => {

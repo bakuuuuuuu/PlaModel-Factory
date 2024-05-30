@@ -11,7 +11,7 @@
     margin-top: 60px;
 }
 
-.productList-content-img {
+.productList-content-img-all {
     width: 90%;
     height: 400px;
     background-image: url("https://shop-phinf.pstatic.net/20240527_279/1716774851034aY5EV_JPEG/pc_%B3%D7%C0%CC%B9%F6_%C4%AB%C5%D7%B0%ED%B8%AE_%BB%F3%B4%DC%B9%E8%B3%CA_01.jpg?type=m1280");
@@ -104,6 +104,8 @@
 }
 
 #product-img {
+    width: 295px;
+    height: 381px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
@@ -121,4 +123,10 @@
 #productList-ratingContainer{
     display: flex;
     flex-direction: row;
+}
+
+.productList-filterDropdown {
+    margin-top: 10px;
+    border : 3px solid cornflowerblue;
+    cursor: pointer;
 }
