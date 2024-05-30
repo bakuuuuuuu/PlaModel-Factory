@@ -8,7 +8,6 @@ import EditProfile from "./editProfile";
 import EditReview from "./editReview";
 import ReservationInquiry from "./reservationInquiry";
 import AccountDelete from "./accountDelete";
-import WishList from "./wishList";
 
 const Mypage = () => {
     const { user } = useContext(AuthContext);
@@ -31,10 +30,6 @@ const Mypage = () => {
         setProfileComponent(4);
     };
 
-    const handleWishListClick = () => {
-        setProfileComponent(5);
-    };
-
     return (
         <div>
             <Header />
@@ -54,7 +49,6 @@ const Mypage = () => {
                             <h4 className="sidemenu-desc">나의 쇼핑정보</h4>
                             <li className="mypage-menu" onClick={handleReservationInquiryClick}>주문 내역</li>
                             <li className="mypage-menu" onClick={handleEditReviewClick}>리뷰 관리</li>
-                            <li className="mypage-menu" onClick={handleWishListClick}>위시 리스트</li>
                     </div><br></br>
                     <div className="sidemenu-editInfo">
                             <h4 className="sidemenu-desc">개인정보관리</h4>
@@ -67,7 +61,6 @@ const Mypage = () => {
                     {profileComponent === 2 && <ReservationInquiry />}
                     {profileComponent === 3 && <AccountDelete />}
                     {profileComponent === 4 && <EditReview />}
-                    {profileComponent === 5 && <WishList />}
                 </div>
             </div>
             <div className="horizontalLineContainer">

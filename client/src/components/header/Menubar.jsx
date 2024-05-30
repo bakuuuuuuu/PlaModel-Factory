@@ -18,7 +18,7 @@ const Menubar = () => {
                 <span className="menubar-menu">건담 프라모델</span>
                 <span className="menubar-menu">디지몬 프라모델</span>
                 <span className="menubar-menu">포켓몬 프라모델</span>
-                <span className="menubar-menu" id="menubar-menu-other">기타 프라모델</span>
+                <span className="menubar-menu" id="menubar-menu-other">헥사기어</span>
             </div>
         </div>
     )

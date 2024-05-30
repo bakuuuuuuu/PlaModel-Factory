@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [quantity, setQuantity] = useState(1);
-    const { user } = useContext(AuthContext);
+    const { user, dispatch } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -63,6 +63,11 @@ const ProductDetail = () => {
             };
 
             await axios.post(`${apiUrl}/carts/add`, cartItem, { withCredentials: true });
+
+            // 장바구니 상품 수 업데이트
+            const cartResponse = await axios.get(`${apiUrl}/carts/${user._id}`, { withCredentials: true });
+            dispatch({ type: "SET_CART_ITEM_COUNT", payload: cartResponse.data.products.length });
+
             alert("장바구니에 상품이 추가되었습니다.");
         } catch (error) {
             console.error("장바구니에 상품을 추가하는 도중 오류가 발생했습니다!", error);

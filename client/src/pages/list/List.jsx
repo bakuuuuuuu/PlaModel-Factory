@@ -96,7 +96,7 @@ const List = () => {
                 <div className="productList-content-middle">
                     <div className="productList-content-middle-position">
                         <div className="productList-content-middle-top">
-                            <h4>건담 프라모델</h4>
+                            <h4>전체 상품</h4>
                         </div>
                         <div className="productList-content-middle-bottom">
                             <div>
