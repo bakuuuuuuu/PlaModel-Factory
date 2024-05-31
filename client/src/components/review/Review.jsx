@@ -77,7 +77,7 @@ const Review = (props) => {
             {currentReviews.map(review => (
                 <div key={review._id} className="Review">
                     <div className="reviewP">
-                        <FontAwesomeIcon icon={faUser} className='reviewIcon' /> {review.username} <Rating rating={review.rating} />
+                        <FontAwesomeIcon icon={faUser} className='reviewIcon' /> {review.userId.username} <Rating rating={review.rating} />
                     </div>
                     <div className="reviewP">
                         <FontAwesomeIcon icon={faCalendar} className='reviewIcon' />{formatDate(review.createdAt)}

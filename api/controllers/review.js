@@ -1,5 +1,5 @@
 import Review from "../models/Review.js";
-import { createError } from "../utils/error.js";
+import Product from "../models/Product.js";
 
 //CREATE
 export const createReview = async (req, res, next) => {
@@ -66,19 +66,33 @@ export const getReviewsByProductId = async (req, res, next) => {
     const { productid } = req.params;
     console.log(productid);
     try {
-        const reviews = await Review.find({ productid });
+        const reviews = await Review.find({ productid }).populate('userId', 'username');
         res.status(200).json(reviews);
     } catch (err) {
         next(err);
     }
 };
 
-//GET Reviews BY Username
-export const getReviewsByUsername = async (req, res, next) => {
-    const { username } = req.params;
+// 사용자 ID로 리뷰 가져오기 (제품 이름 포함)
+export const getReviewsByUserIdWithProductNames = async (req, res, next) => {
+    const { userId } = req.params;
     try {
-        const reviews = await Review.find({ username });
-        res.status(200).json(reviews);
+        const reviews = await Review.find({ userId });
+        const productIds = reviews.map(review => review.productid);
+
+        // 제품 정보 가져오기
+        const products = await Product.find({ _id: { $in: productIds } });
+        const productMap = products.reduce((acc, product) => {
+            acc[product._id] = product.productName;
+            return acc;
+        }, {});
+
+        const reviewsWithProductNames = reviews.map(review => ({
+            ...review.toObject(),
+            productName: productMap[review.productid] || "Unknown Product"
+        }));
+
+        res.status(200).json(reviewsWithProductNames);
     } catch (err) {
         next(err);
     }

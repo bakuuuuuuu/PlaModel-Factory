@@ -25,7 +25,7 @@ router.put("/:id/profile-image", verifyUser, upload.single('file'), updateProfil
 // DELETE 라우트
 router.delete("/:id", verifyUser, deleteUser);
 
-router.delete("/mypage/:id", deleteUser);
+router.delete("/mypage/:id", verifyToken, deleteUser);
 
 // GET 라우트
 router.get("/:id", verifyUser, getUser); 

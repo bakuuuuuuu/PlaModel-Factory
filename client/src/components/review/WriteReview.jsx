@@ -9,7 +9,7 @@ const WriteReview = ({ productId }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [reviewData, setReviewData] = useState({
-        username: user ? user.username : "",
+        userId: user ? user._id : "",
         title: "",
         content: "",
         productid: productId,
@@ -49,7 +49,7 @@ const WriteReview = ({ productId }) => {
             const res = await axios.post(`${apiUrl}/reviews/create`, reviewData);
 
             setReviewData({
-                username: user.username,
+                username: user._id,
                 title: "",
                 content: "",
                 productid: productId,

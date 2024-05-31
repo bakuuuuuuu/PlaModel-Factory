@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 const ReviewSchema = new mongoose.Schema({
-    username : { // 작성자
-        type : String,
-        required : true,
+    userId: { // 작성자 ID
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     },
 
     title : { // 제목
