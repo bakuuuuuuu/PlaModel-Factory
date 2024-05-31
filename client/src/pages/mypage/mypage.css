@@ -43,10 +43,7 @@
 }
 
 .horizontal-line {
-    width: 80%;
-    height: 1px;
-    background-color: #ccc;
-    margin: 20px 0;
+    margin-bottom: 100px;
 }
 
 .mypage-desc {

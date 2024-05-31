@@ -5,9 +5,10 @@ import {
     getReview,
     getReviews,
     updateReview,
-    getReviewsByProductId
+    getReviewsByProductId,
+    getUserReviews
 } from "../controllers/review.js";
-import { checkReviewOwnership } from "../utils/verifyToken.js";
+import { checkReviewOwnership, verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
@@ -28,5 +29,9 @@ router.get("/", getReviews);
 
 //GET Reviews BY Product ID (아직 안됌)
 router.get("/review/:productid", getReviewsByProductId);
+
+// 로그인한 사용자가 작성한 리뷰 가져오기
+router.get("/user", verifyToken, getUserReviews);
+
 
 export default router;

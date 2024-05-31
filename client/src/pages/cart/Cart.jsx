@@ -79,6 +79,27 @@ const Cart = () => {
         setIsAllSelected(!isAllSelected);
     };
 
+    const handlePurchase = async () => {
+        const apiUrl = process.env.REACT_APP_API_URL;
+
+        try {
+            // 주문 생성 요청
+            await axios.post(`${apiUrl}/orders`, {}, { withCredentials: true });
+
+            // 장바구니 다시 불러오기
+            const response = await axios.get(`${apiUrl}/carts/${user._id}`, { withCredentials: true });
+            setCart(response.data);
+
+            // 장바구니 상품 수 업데이트
+            dispatch({ type: "SET_CART_ITEM_COUNT", payload: 0 });
+
+            alert("주문이 완료되었습니다.");
+        } catch (error) {
+            console.error("There was an error processing the purchase!", error);
+        }
+    };
+
+
     const totalProductPrice = calculateTotalProductPrice();
     const shippingCost = cart.products.length === 0 ? 0 : 2500;
     const totalPrice = totalProductPrice + shippingCost;
@@ -132,12 +153,14 @@ const Cart = () => {
                         <p><strong>배송비: </strong>{new Intl.NumberFormat('ko-KR').format(shippingCost)}원</p>
                         <hr />
                         <p><strong>총 결제 예정 금액: </strong>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</p>
-                        <button className="purchaseButton">구매하기</button>
+                        <button className="purchaseButton" onClick={handlePurchase}>구매하기</button>
                         <button className="removeButton" onClick={handleRemoveSelected} disabled={selectedProducts.length === 0}>선택 상품 삭제</button>
                     </div>
                 </div>
             </div>
-            <Footer />
+            <div className='cart-footer'>
+                <Footer />
+            </div>
         </div>
     );
 };

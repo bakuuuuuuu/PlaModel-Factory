@@ -31,7 +31,9 @@ const BestProductList = () => {
                     return { ...product, reviewCount: productReviews.length };
                 });
 
-                setProducts(productsWithReviewCount);
+                const filteredProducts = productsWithReviewCount.filter(product => product.reviewCount >= 3);
+
+                setProducts(filteredProducts);
                 setReviews(reviewResponse.data);
             } catch (error) {
                 console.error("There was an error fetching the data!", error);
@@ -76,7 +78,7 @@ const BestProductList = () => {
     const sortByLowestPrice = (a, b) => a.price - b.price;
     const sortByHighestPrice = (a, b) => b.price - a.price;
     const sortByDiscountRate = (a, b) => b.discountedPrice - a.discountedPrice;
-    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; // 수정된 부분
+    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount;
     const sortByHighestRating = (a, b) => calculateAverageRating(b._id) - calculateAverageRating(a._id);
 
     // 공통 정렬 핸들러

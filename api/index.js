@@ -14,6 +14,7 @@ import usersRoute from "./routes/users.js";
 import productsRoute from "./routes/products.js";
 import reviewsRoute from "./routes/reviews.js";
 import cartsRoute from "./routes/carts.js";
+import ordersRoute from "./routes/orders.js";
 
 const app = express();
 dotenv.config();
@@ -58,6 +59,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/reviews", reviewsRoute);
 app.use("/api/carts", cartsRoute);
+app.use("/api/orders", ordersRoute);
 
 // 서버 시작 및 DB 연결 시도
 app.listen(process.env.PORT, () => {

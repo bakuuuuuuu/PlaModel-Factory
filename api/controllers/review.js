@@ -1,4 +1,5 @@
 import Review from "../models/Review.js";
+import { createError } from "../utils/error.js";
 
 //CREATE
 export const createReview = async (req, res, next) => {
@@ -72,3 +73,16 @@ export const getReviewsByProductId = async (req, res, next) => {
     }
 };
 
+// 로그인한 사용자가 작성한 리뷰 가져오기
+export const getUserReviews = async (req, res, next) => {
+    try {
+        const { username } = req.user;
+        const reviews = await Review.find({ username });
+        if (reviews.length === 0) {
+            return next(createError(404, "작성한 리뷰가 없습니다."));
+        }
+        res.status(200).json(reviews);
+    } catch (err) {
+        next(err);
+    }
+};

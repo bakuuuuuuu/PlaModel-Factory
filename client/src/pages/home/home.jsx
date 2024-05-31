@@ -17,6 +17,7 @@ const images = [
 const Home = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [recommendations, setRecommendations] = useState([]);
+    const [newProductRecommendations, setNewProductRecommendations] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -34,7 +35,12 @@ const Home = () => {
                 const response = await axios.get(`${apiUrl}/products`);
                 const products = response.data;
                 const shuffled = products.sort(() => 0.5 - Math.random());
-                setRecommendations(shuffled.slice(0, 4));
+                setRecommendations(shuffled.slice(0, 5));
+
+                // isNewProduct가 true인 상품들 중에서 랜덤으로 4개 선택
+                const newProducts = products.filter(product => product.isNewProduct);
+                const shuffledNewProducts = newProducts.sort(() => 0.5 - Math.random());
+                setNewProductRecommendations(shuffledNewProducts.slice(0, 4));
             } catch (error) {
                 console.error("Failed to fetch products", error);
             }
@@ -58,6 +64,22 @@ const Home = () => {
     const handleProductClick = (id) => {
         navigate(`/products/${id}`);
     };
+
+    const handleCategorypokemon = () => {
+        navigate("/pokemonList")
+    }
+
+    const handleCategorydigimon = () => {
+        navigate("/digimonList")
+    }
+
+    const handleCategorygundam = () => {
+        navigate("/gundamList")
+    }
+
+    const handleCategoryhexagear = () => {
+        navigate("/hexaGearList")
+    }
 
     return (
         <div className="home-all">
@@ -85,16 +107,40 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
+                <div className="home-newProduct-desc">
+                    <h1>NEW! 화제의 <span id="home-newProduct-desc-new">신상품</span></h1>
+                </div>
+                <div>
+                    <div className="home-new-products">
+                        {newProductRecommendations.map((product, index) => (
+                            <div key={index} className="new-product-item" onClick={() => handleProductClick(product._id)}>
+                                <img src={product.photos[0]} alt={`New Product ${index + 1}`} id="home-new-product-img" />
+                                <p>{product.productName}</p>
+                                <p>{new Intl.NumberFormat('ko-KR').format(product.price)}원</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="home-recommendation-category">
+                    <div className="home-recommendation-category-pokemon" onClick={handleCategorypokemon}>
+                    </div>
+                    <div className="home-recommendation-category-digimon" onClick={handleCategorydigimon}>
+                    </div>
+                    <div className="home-recommendation-category-gundam" onClick={handleCategorygundam}>
+                    </div>
+                    <div className="home-recommendation-category-hexagear" onClick={handleCategoryhexagear}>
+                    </div>
+                </div>
                 <div className="home-hashtag">
                     <span className="hashtag">#마감임박! 종료예정 예약상품</span>
                     <span className="hashtag">#누구나 갖고싶은 프라모델</span>
-                    <span className="hashtag">#시선집중! NEW 예약상품</span>
+                    <span className="hashtag">#시선집중! NEW 신상품</span>
                     <span className="hashtag">#취향저격 프라모델</span>
                 </div>
                 <div className="home-recommendation">
                     {recommendations.map((product, index) => (
                         <div key={index} className="recommendation-item" onClick={() => handleProductClick(product._id)}>
-                            <img src={product.photos[0]} alt={`Recommendation ${index + 1}`} id="home-recommendation-img"/>
+                            <img src={product.photos[0]} alt={`Recommendation ${index + 1}`} id="home-recommendation-img" />
                             <p>{product.productName}</p>
                             <p>{new Intl.NumberFormat('ko-KR').format(product.price)}원</p>
                         </div>

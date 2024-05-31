@@ -26,7 +26,10 @@ const NewProductList = () => {
                     axios.get(`${apiUrl}/reviews`)
                 ]);
 
-                const productsWithReviewCount = productResponse.data.map(product => {
+                // isNewProduct가 true인 상품들 필터링
+                const newProducts = productResponse.data.filter(product => product.isNewProduct);
+
+                const productsWithReviewCount = newProducts.map(product => {
                     const productReviews = reviewResponse.data.filter(review => review.productid === product._id);
                     return { ...product, reviewCount: productReviews.length };
                 });
@@ -76,7 +79,7 @@ const NewProductList = () => {
     const sortByLowestPrice = (a, b) => a.price - b.price;
     const sortByHighestPrice = (a, b) => b.price - a.price;
     const sortByDiscountRate = (a, b) => b.discountedPrice - a.discountedPrice;
-    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; // 수정된 부분
+    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount;
     const sortByHighestRating = (a, b) => calculateAverageRating(b._id) - calculateAverageRating(a._id);
 
     // 공통 정렬 핸들러

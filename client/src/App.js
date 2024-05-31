@@ -20,6 +20,7 @@ import FindAccount from "./pages/findAccount/FindAccount";
 import ChangePassword from "./pages/changePassword/ChangePassword";
 import Mypage from "./pages/mypage/Mypage";
 import Cart from "./pages/cart/Cart";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   const [canAccessChangePassword, setCanAccessChangePassword] = useState(false);
@@ -42,7 +43,14 @@ function App() {
             canAccessChangePassword ? <ChangePassword /> : <Navigate to="/findAccount" />
           }
         />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route
+          path="/mypage"
+          element={
+            <PrivateRoute>
+              <Mypage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/list" element={<List />} />
         <Route path="/bestProductList" element={<BestProductList/>}/>
         <Route path="/newProductList" element={<NewProductList/>}/>
