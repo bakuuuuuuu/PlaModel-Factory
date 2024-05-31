@@ -1,0 +1,29 @@
+.SearchBar-input{
+    width: 700px;
+    height: 30px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.SearchBar-input::placeholder {
+    text-align: center;
+}
+
+.SearchBar-input:focus {
+    border-color: #007BFF;
+  }
+
+.SearchBar-btn {
+    margin-left: 10px;
+    background-color: cornflowerblue;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.Search-icon {
+    width: 20px;
+    height: 20px;
+}

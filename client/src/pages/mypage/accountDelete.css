@@ -24,9 +24,14 @@
 }
 
 .AccountDelete-input-element {
+    outline: none;
     width: 360px;
     height: 48px;
     margin: 10px;
+}
+
+.AccountDelete-input-element:focus {
+    border: 2px solid cornflowerblue;
 }
 
 .AccountDelete-btn-element {

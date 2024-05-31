@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSignInAlt, faUserPlus, faUserCircle, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import "./header.css"
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { user, dispatch, cartItemCount } = useContext(AuthContext);
@@ -47,6 +48,7 @@ const Header = () => {
     <div className="navbar">
       <div className="navContainer">
         <span className="logo" onClick={handleHomeClick}>PLAMODEL FACTORY</span>
+        <span><SearchBar/></span>
         {user ? (
           <div className="navItems">
             <span>
