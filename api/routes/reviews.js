@@ -6,7 +6,7 @@ import {
     getReviews,
     updateReview,
     getReviewsByProductId,
-    getUserReviews
+    getReviewsByUsername
 } from "../controllers/review.js";
 import { checkReviewOwnership, verifyToken } from "../utils/verifyToken.js";
 
@@ -30,8 +30,7 @@ router.get("/", getReviews);
 //GET Reviews BY Product ID (아직 안됌)
 router.get("/review/:productid", getReviewsByProductId);
 
-// 로그인한 사용자가 작성한 리뷰 가져오기
-router.get("/user", verifyToken, getUserReviews);
-
+//GET Reviews BY Username
+router.get("/user/:username", getReviewsByUsername);
 
 export default router;
