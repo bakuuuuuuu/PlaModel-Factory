@@ -21,6 +21,7 @@ import ChangePassword from "./pages/changePassword/ChangePassword";
 import Mypage from "./pages/mypage/Mypage";
 import Cart from "./pages/cart/Cart";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import SearchResults from "./pages/list/SearchResults";
 
 function App() {
   const [canAccessChangePassword, setCanAccessChangePassword] = useState(false);
@@ -59,6 +60,7 @@ function App() {
         <Route path="/pokemonList" element={<PokemonList/>}/>
         <Route path="/hexaGearList" element={<HexaGearList/>}/>
         <Route path="/cart" element={<Cart />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
   );

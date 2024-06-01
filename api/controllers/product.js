@@ -91,3 +91,14 @@ export const countByType = async (req, res, next) => {
         next(err);
     }
 };
+
+// SEARCH
+export const searchProducts = async (req, res, next) => {
+    const query = req.query.q;
+    try {
+        const products = await Product.find({ productName: { $regex: query, $options: 'i' } });
+        res.status(200).json(products);
+    } catch (err) {
+        next(err);
+    }
+};

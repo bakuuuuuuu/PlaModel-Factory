@@ -67,7 +67,7 @@ const Review = (props) => {
 
     return (
         <div className="Reviews">
-            <h1>상품 후기</h1>
+            <h1>상품 리뷰</h1>
             <select value={selectedRating || ''} onChange={handleRatingChange} className='rating-select'>
                 <option value="">전체</option>
                 {[1, 2, 3, 4, 5].map(rating => (

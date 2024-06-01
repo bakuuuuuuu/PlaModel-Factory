@@ -7,9 +7,9 @@ import {
     getProduct,
     getProducts,
     updateProduct,
+    searchProducts
 } from "../controllers/product.js";
-import Product from "../models/Product.js";
-import { verifyAdmin } from "../utils/verifyToken.js"
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
@@ -29,5 +29,8 @@ router.get("/find/:id", getProduct);
 router.get("/", getProducts);
 router.get("/countByCategory", countByCategory);
 router.get("/countByType", countByType);
+
+// SEARCH
+router.get("/search", searchProducts);
 
 export default router;

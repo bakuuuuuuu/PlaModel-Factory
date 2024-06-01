@@ -81,7 +81,7 @@ const EditReview = () => {
     return (
         <div className="edit-review-container">
             <div className='edit-review-content'>
-                <h1>리뷰 관리 페이지</h1>
+                <h1>리뷰 관리</h1>
                 {editMode ? (
                     <div className="edit-review-modal">
                         <h2>리뷰 수정</h2>

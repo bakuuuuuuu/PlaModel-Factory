@@ -9,15 +9,18 @@ const SearchBar = () => {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
+        setInput(e.target.value);
     };
 
     const handleSearch = () => {
-
+        if (input.trim()) {
+            navigate(`/search?q=${input}`);
+        }
     };
 
     return (
         <div className="SearchBar-container">
-            <input type="text" className="SearchBar-input" placeholder='검색어를 입력해주세요' onChange={handleChange}></input>
+            <input type="text" className="SearchBar-input" placeholder='상품명을 입력해주세요' onChange={handleChange} value={input}></input>
             <button className="SearchBar-btn" onClick={handleSearch}>
                 <FontAwesomeIcon icon={faSearch} className="Search-icon" />
             </button>
