@@ -6,20 +6,26 @@ import {
     getReviews,
     updateReview,
     getReviewsByProductId,
-    getReviewsByUserIdWithProductNames
+    getReviewsByUserIdWithProductNames,
 } from "../controllers/review.js";
-import { checkReviewOwnership, verifyToken } from "../utils/verifyToken.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 //CREATE
 router.post("/create", createReview);
 
-//UPDATE
-router.put("/:id", checkReviewOwnership, updateReview);
+//UPDATE(관리자용)
+router.put("/:id", verifyAdmin, updateReview);
 
-//DELETE
-router.delete("/:id", checkReviewOwnership, deleteReview);
+//DELETE(관리자용)
+router.delete("/:id", verifyAdmin, deleteReview);
+
+//UPDATE(사용자용)
+router.put("/user/:id", updateReview);
+
+//DELETE(사용자용)
+router.delete("/user/:id", deleteReview);
 
 //GET
 router.get("/:id", getReview);

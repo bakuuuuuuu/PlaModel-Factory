@@ -67,3 +67,39 @@ h1 {
 .er-delete-btn:hover {
     background-color: darkred;
 }
+
+.edit-review-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.star-rating {
+    display: flex;
+    gap: 5px;
+}
+
+#edit-reivew-input-title {
+    width: 360px;
+    height: 48px; 
+}
+
+#edit-reivew-input-content {
+    width: 360px;
+    height: 70px; 
+}
+
+.submit-btn {
+    margin-left: 50px;
+}
