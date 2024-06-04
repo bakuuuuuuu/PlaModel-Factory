@@ -121,7 +121,7 @@ export const getUsers = async (req, res, next) => {
     }
 };
 
-
+// 회원 정보 수정(이미지)
 export const updateProfileImage = async (req, res, next) => {
     try {
         const userId = req.params.id;

@@ -12,31 +12,31 @@ import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
-//CREATE
+// 리뷰 등록
 router.post("/create", createReview);
 
-//UPDATE(관리자용)
+// 리뷰 수정(관리자용)
 router.put("/:id", verifyAdmin, updateReview);
 
-//DELETE(관리자용)
+// 리뷰 삭제(관리자용)
 router.delete("/:id", verifyAdmin, deleteReview);
 
-//UPDATE(사용자용)
+// 리뷰 수정(사용자용)
 router.put("/user/:id", updateReview);
 
-//DELETE(사용자용)
+// 리뷰 삭제(사용자용)
 router.delete("/user/:id", deleteReview);
 
-//GET
+// 리뷰 조회
 router.get("/:id", getReview);
 
-//GET ALL
+// 전체 리뷰 조회
 router.get("/", getReviews);
 
-//GET Reviews BY Product ID
+// 사용자 ID로 리뷰 가져오기 (제품 이름 포함)
 router.get("/review/:productid", getReviewsByProductId);
 
-// GET Reviews BY UserId
+// 상품 ID 로 리뷰 조회
 router.get("/user/:userId", getReviewsByUserIdWithProductNames);
 
 export default router;

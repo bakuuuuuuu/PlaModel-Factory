@@ -77,7 +77,7 @@ const List = () => {
     const sortByLowestPrice = (a, b) => a.price - b.price;
     const sortByHighestPrice = (a, b) => b.price - a.price;
     const sortByDiscountRate = (a, b) => b.discountedPrice - a.discountedPrice;
-    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; // 수정된 부분
+    const sortByMostReviews = (a, b) => b.reviewCount - a.reviewCount; 
     const sortByHighestRating = (a, b) => calculateAverageRating(b._id) - calculateAverageRating(a._id);
 
     // 공통 정렬 핸들러

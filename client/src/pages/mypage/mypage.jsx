@@ -8,8 +8,6 @@ import EditProfile from "./editProfile";
 import EditReview from "./editReview";
 import ReservationInquiry from "./reservationInquiry";
 import AccountDelete from "./accountDelete";
-import Star from "../../components/star/Star";
-import Rating from "../../components/rating/Rating";
 
 const Mypage = () => {
     const { user } = useContext(AuthContext);
