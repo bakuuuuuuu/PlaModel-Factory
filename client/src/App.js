@@ -22,6 +22,7 @@ import Mypage from "./pages/mypage/Mypage";
 import Cart from "./pages/cart/Cart";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SearchResults from "./pages/list/SearchResults";
+///수정수정수정
 
 function App() {
   const [canAccessChangePassword, setCanAccessChangePassword] = useState(false);
