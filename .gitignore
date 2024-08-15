@@ -3,8 +3,14 @@
 # dependencies
 /api/node_modules
 /client/node_modules
+/api2/node_modules
+/client2/node_modules
+
+# env files
+/api/.env
+/api2/.env
+/client/.env
+/client2/.env
 
 # misc
 .DS_Store
-/api/.env
-/client/.env

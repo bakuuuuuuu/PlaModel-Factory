@@ -7,7 +7,7 @@ import {
     getCartByUserId,
     removeFromCart 
 } from "../controllers/cart.js";
-import { verifyAdmin, verifyToken, verifyUser, verifyTokenForCart, verifyUserForCart } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyTokenForCart } from "../utils/verifyToken.js";
 
 const router = express.Router();
 

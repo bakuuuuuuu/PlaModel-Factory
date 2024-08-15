@@ -1,0 +1,132 @@
+.productListContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.productList-content-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.productList-content-img-all {
+    width: 90%;
+    height: 400px;
+    background-image: url("https://shop-phinf.pstatic.net/20240527_279/1716774851034aY5EV_JPEG/pc_%B3%D7%C0%CC%B9%F6_%C4%AB%C5%D7%B0%ED%B8%AE_%BB%F3%B4%DC%B9%E8%B3%CA_01.jpg?type=m1280");
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+}
+
+.productList-content-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productList-content-middle-position {
+    width: 90%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.productList-content-middle-bottom {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    border-top: 3px solid cornflowerblue;
+}
+
+.productList-filterbtn {
+    margin: 10px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: #aaa;
+    transition: font-size 0.4s;
+}
+
+.productList-filterbtn:hover {
+    color: black;
+    font-size: medium;
+}
+
+.filter-text {
+    color: #aaa;
+}
+
+.productList-content-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.productList-content-bottom-products {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    margin-left: 100px;
+}
+
+.productList-content-bottom-product {
+    width: calc(25% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.pagination-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.pagination-button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+#product-img {
+    width: 295px;
+    height: 381px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+#List-discount {
+    margin-left: 3px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-size: small;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#productList-ratingContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.productList-filterDropdown {
+    margin-top: 10px;
+    border : 3px solid cornflowerblue;
+    cursor: pointer;
+}

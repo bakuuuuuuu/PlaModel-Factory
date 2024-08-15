@@ -1,0 +1,125 @@
+/* 기본적인 스타일을 위한 수정 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 전체 컨테이너를 flex로 설정 */
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* flex를 사용해 콘텐츠 영역을 확장 */
+.cartContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cartProducts {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.cartProduct {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.cartProduct span {
+    flex: 1;
+    text-align: center;
+}
+
+.cartProductHeader {
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+    color: white;
+    height: 38px; /* 높이 설정 */
+    line-height: 50px; /* 텍스트 중앙 정렬 */
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    padding: 0 10px; /* 패딩 추가 */
+}
+
+.cartSummary {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.purchaseButton {
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.purchaseButton:hover {
+    background-color: #003580;
+}
+
+.removeButton {
+    background-color: #ff4d4d;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.removeButton:hover {
+    background-color: #cc0000;
+}
+
+#cartProductHeader-productName {
+    margin-left: 167px;
+}
+
+#cartProductHeader-count {
+    margin-left: 342px;
+}
+
+#cartProductHeader-price {
+    margin-left: 349px;
+}
+
+#cartProduct-productCheck {
+    margin-left: 13px;
+}
+
+.cartInNone {
+    text-align: center;
+    margin-top: 120px;
+}
+
+.cart-footer {
+    margin-top: 200px;
+}

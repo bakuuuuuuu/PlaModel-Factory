@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
-///수정수정수정
 
 
 // 회원가입 미들웨어
@@ -77,6 +76,9 @@ export const login = async (req, res, next) => {
         res
             .cookie("access_token", token, {
                 httpOnly: true,
+                samSite: "strict",
+                domain: "mycoding.today",
+                path:'/'
             })
             .status(200)
             .json({ details: { ...otherDetails }, isAdmin });
@@ -92,6 +94,8 @@ export const logout = (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
+            domain: "mycoding.today",
+            path : '/'
         })
         .status(200)
         .json({ message: "로그아웃이 완료되었습니다!" });

@@ -1,0 +1,33 @@
+.menubar {
+    height: 60px;
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.menuContainer {
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menubar-menu {
+    cursor: pointer;
+    transition: font-size 0.3s;
+}
+
+.menubar-menu:hover {
+    font-size: large;
+}
+
+#menubar-menu-all {
+    margin-left: 140px;
+}
+
+#menubar-menu-other {
+    margin-right: 140px;
+}

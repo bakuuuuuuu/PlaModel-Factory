@@ -1,0 +1,61 @@
+.searchResultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    min-height: 70vh; /* 최소 높이 설정 */
+}
+
+.search-results {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.search-result-item {
+    width: calc(25% - 20px);
+    margin: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-result-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-result-item h4,
+.search-result-item p {
+    margin: 10px 0;
+}
+
+.search-result-item p {
+    font-size: 14px;
+    color: #555;
+}
+
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* 중앙 정렬을 위해 높이를 설정 */
+    color: #555;
+    font-size: 18px;
+}
