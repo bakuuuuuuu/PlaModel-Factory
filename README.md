@@ -9,31 +9,37 @@
 ---
 
 ## Project Description
-PlaModel-Factory는 프라모델 애호가들을 위한 웹 플랫폼으로, 다양한 프라모델을 구경하고 구매할 수 있는 기능을 제공합니다. 사용자는 원하는 프라모델을 검색하고, 관련 정보를 확인하며, 장바구니에 담아 구매까지 진행할 수 있습니다.
+
+**PlaModel-Factory**는 프라모델 애호가들을 위한 웹 플랫폼으로, 다양한 프라모델을 구경하고 구매할 수 있는 기능을 제공합니다. 사용자는 원하는 프라모델을 검색하고, 관련 정보를 확인하며, 장바구니에 담아 구매까지 진행할 수 있습니다.
 
 ## Demo Video
 
 프로젝트의 시연 영상을 확인해보세요:
 
-[![시연 영상 보기](https://img.youtube.com/vi/E_KFmdy8OSw/0.jpg)](https://youtu.be/E_KFmdy8OSw)
+<p align="center">
+  <a href="https://youtu.be/E_KFmdy8OSw">
+    <img src="https://img.youtube.com/vi/E_KFmdy8OSw/0.jpg" alt="시연 영상 보기">
+  </a>
+</p>
 
 ---
 
 ## Development
 
-| 항목  | 내용                                              |
-|-------|---------------------------------------------------|
-| **OS** | Windows / Linux                            |
-| **IDE** | Visual Studio Code                               |
-| **Language** | JavaScript (Node.js, React)                    |
-| **React version** | React 18.3.1                                 |
-| **Database** | MongoDB, MySQL                             |
-| **Hosting** | AWS EC2 (api2, client2)                     |
+| 항목            | 내용                                           |
+|-----------------|------------------------------------------------|
+| **OS**          | Windows / Linux                                |
+| **IDE**         | Visual Studio Code                             |
+| **Language**    | JavaScript (Node.js, React)                    |
+| **React Version** | React 18.3.1                                 |
+| **Database**    | MongoDB, MySQL                                 |
+| **Hosting**     | AWS EC2 (api2, client2)                        |
 
+---
 
 ## Architecture
 
-PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습니다.
+PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습니다:
 
 1. **API**: Node.js 기반 RESTful API 서버, MongoDB와 연결하여 데이터 저장 및 관리를 담당.
 2. **Client**: React로 구성된 프론트엔드 애플리케이션, API와 통신하여 사용자 인터페이스를 제공.
