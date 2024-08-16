@@ -46,6 +46,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
   "multer": "^1.4.5-lts.1",
   "nodemon": "^3.1.0"
 }
+```
 
 #### API Dependencies (MySQL 기반)
 
@@ -63,6 +64,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
   "sequelize": "^6.37.3",
   "nodemon": "^3.1.3"
 }
+```
 
 ### Client & Client2 Dependencies
 
@@ -86,6 +88,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
   "react-date-range": "^1.4.0",
   "react-router-dom": "^6.3.0"
 }
+```
 
 ---
 
