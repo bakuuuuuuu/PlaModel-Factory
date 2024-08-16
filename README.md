@@ -16,7 +16,7 @@ PlaModel-Factory는 프라모델 애호가들을 위한 웹 플랫폼으로, 다
 [![시연 영상 보기](https://img.youtube.com/vi/E_KFmdy8OSw/0.jpg)](https://youtu.be/E_KFmdy8OSw)
 
 ---
-
+<br>
 ## Development
 
 | 항목  | 내용                                              |
@@ -28,6 +28,7 @@ PlaModel-Factory는 프라모델 애호가들을 위한 웹 플랫폼으로, 다
 | **Database** | MongoDB, MySQL                             |
 | **Hosting** | AWS EC2 (api2, client2)                     |
 
+<br>
 ## Architecture
 
 PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습니다.
@@ -37,7 +38,8 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 3. **API2**: Node.js 기반의 두 번째 RESTful API 서버, MySQL과 통합되어 데이터 처리 및 관리.
 4. **Client2**: React로 구축된 두 번째 프론트엔드 애플리케이션, API2와 연동되어 프라모델 데이터를 제공.
 
-### API & API2 Dependencies
+<br>
+## API & API2 Dependencies
 
 #### API Dependencies (MongoDB 기반)
 
@@ -74,7 +76,8 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 }
 ```
 
-### Client & Client2 Dependencies
+<br>
+## Client & Client2 Dependencies
 
 #### Client & Client2 Dependencies (React 기반)
 
@@ -100,6 +103,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 
 ---
 
+<br>
 ### Dependencies
 
 #### Core Libraries
@@ -138,9 +142,10 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 
 ---
 
-### Features
+<br>
+## Features
 
-**다양한 프라모델 카탈로그**: 사용자는 다양한 프라모델을 검색하고 탐색할 수 있습니다.
-**다양한 결제 옵션**: 다양한 결제 방법을 지원하여 사용자에게 편리한 결제 경험을 제공합니다.
-**구매 후 리뷰 기능**: 구매한 제품에 대한 리뷰를 작성하고 다른 사용자들과 공유할 수 있습니다.
-**실시간 재고 관리**: 재고 상태를 실시간으로 반영하여 사용자가 구매 가능한 제품만을 확인할 수 있습니다.
+1. **다양한 프라모델 카탈로그**: 사용자는 다양한 프라모델을 검색하고 탐색할 수 있습니다.
+2. **다양한 결제 옵션**: 다양한 결제 방법을 지원하여 사용자에게 편리한 결제 경험을 제공합니다.
+3. **구매 후 리뷰 기능**: 구매한 제품에 대한 리뷰를 작성하고 다른 사용자들과 공유할 수 있습니다.
+4. **실시간 재고 관리**: 재고 상태를 실시간으로 반영하여 사용자가 구매 가능한 제품만을 확인할 수 있습니다.
