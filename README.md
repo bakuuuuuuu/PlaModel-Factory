@@ -2,7 +2,7 @@
 
 ![PlaModel-Factory Logo](PlaModel-Factory-Logo.jpg)
 
-<p align="center"> 각종 프라모델을 구경하고 구매할 수 있는 플랫폼 </p>
+<p align="center"><strong>"각종 프라모델을 구경하고 구매할 수 있는 플랫폼"</strong></p>
 
 ---
 
