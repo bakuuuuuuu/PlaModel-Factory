@@ -1,6 +1,7 @@
-# PlaModel-Factory
-
-![PlaModel-Factory Logo](PlaModel-Factory-Logo.jpg)
+<p align="center">
+  <h1>PlaModel-Factory</h1>
+  <img src="PlaModel-Factory-Logo.jpg" alt="PlaModel-Factory Logo">
+</p>
 
 <p align="center"><strong>"각종 프라모델을 구경하고 구매할 수 있는 플랫폼"</strong></p>
 
