@@ -1,4 +1,4 @@
-<h1 align="center">PlaModel-Factory</h1>
+<h1 align="center">PLAMODEL FACTORY</h1>
 
 <p align="center">
   <img src="PlaModel-Factory-Logo.jpg" alt="PlaModel-Factory Logo">
