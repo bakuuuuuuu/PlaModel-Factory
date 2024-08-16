@@ -16,7 +16,7 @@ PlaModel-Factory는 프라모델 애호가들을 위한 웹 플랫폼으로, 다
 [![시연 영상 보기](https://img.youtube.com/vi/E_KFmdy8OSw/0.jpg)](https://youtu.be/E_KFmdy8OSw)
 
 ---
-<br>
+
 ## Development
 
 | 항목  | 내용                                              |
@@ -28,7 +28,7 @@ PlaModel-Factory는 프라모델 애호가들을 위한 웹 플랫폼으로, 다
 | **Database** | MongoDB, MySQL                             |
 | **Hosting** | AWS EC2 (api2, client2)                     |
 
-<br>
+
 ## Architecture
 
 PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습니다.
@@ -38,7 +38,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 3. **API2**: Node.js 기반의 두 번째 RESTful API 서버, MySQL과 통합되어 데이터 처리 및 관리.
 4. **Client2**: React로 구축된 두 번째 프론트엔드 애플리케이션, API2와 연동되어 프라모델 데이터를 제공.
 
-<br>
+
 ## API & API2 Dependencies
 
 #### API Dependencies (MongoDB 기반)
@@ -76,7 +76,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 }
 ```
 
-<br>
+
 ## Client & Client2 Dependencies
 
 #### Client & Client2 Dependencies (React 기반)
@@ -103,7 +103,7 @@ PlaModel-Factory 프로젝트는 네 개의 주요 모듈로 구성되어 있습
 
 ---
 
-<br>
+
 ### Dependencies
 
 #### Core Libraries
