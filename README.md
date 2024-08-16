@@ -1,5 +1,6 @@
+<h1 align="center">PlaModel-Factory</h1>
+
 <p align="center">
-  <h1>PlaModel-Factory</h1>
   <img src="PlaModel-Factory-Logo.jpg" alt="PlaModel-Factory Logo">
 </p>
 
